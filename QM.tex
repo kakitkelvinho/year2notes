@@ -1,0 +1,778 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[a4paper, total={6.5in, 9.5in}]{geometry}
+
+
+
+\title{Quantum Mechanics Y2}
+\author{Kelvin Ho}
+\date{April 2021}
+
+\begin{document}
+
+
+
+
+
+
+\maketitle
+
+
+
+\section{Introduction}
+
+Undergraduate (year 2) Quantum Mechanics in a nutshell, in \LaTeX.
+
+\section{Postulates}
+
+\begin{enumerate}
+    \item Wavefunctions contain all information (predictions) about a system; it must be continous, single-valued, and square-integrable
+    \item Hermitian Operator represents observable quantity
+    \item Eigenvalues represents the results, and the wavefunction collapses into the eigenfunction after a measurement
+    \item Orthonormal eigenfunctions form basis vectors which construct wavefunctions:
+    \[\psi(x) = \sum_n c_n \phi(x)\]
+    \item Time evolution is governed by the TDSE (Solve SE with separation of variables):
+    \[\Psi(x) = \sum_n c_n \phi(x) e^{\frac{iE_nt}{\hbar}}\]
+    $|c_n|^2$ represents the probability of yielding the value upon measurement.
+\end{enumerate}
+
+\section{Fundamentals}
+
+\subsection{Schrodinger's Equation}
+The Schrodinger Equation is given by:
+\[ i\hbar \frac{\partial \Phi}{\partial t} = \frac{-\hbar^2}{2m} \Psi + V\Psi\]
+
+Using separation of variables, the time independent Schrodinger Equation (TISE) is:
+
+\[ \frac{-\hbar^2}{2m} \psi + V\psi = E\psi\]
+
+Calling LHS the Hamiltonian:
+\[ \hat{H}\Psi = E\Psi\]
+
+The time dependent Schrodinger Equation (TDSE) is:
+
+\[\phi (t) = e^{\frac{-iE_n t}{\hbar}}\]
+
+\subsection{de Brogile Equation}
+
+Because of the wave-particle duality, it is deduced that the momentum of an object is related to its wavelength:
+
+\[ p = \frac{h}{\lambda}\]
+Or: 
+\[ p = \hbar k\]
+Where $k$ is the wavevector $\frac{2\pi}{\lambda}$.
+
+\subsection{Wavefunctions}
+
+The probability at $x$ is (Born's Rule):
+\[|\Psi(x,t)|^2  = \Psi^*(x,t)\Psi(x,t)\]
+
+Thus:
+
+\[ \int_{-\infty}^{\infty}\Psi^*\Psi dx = 1\]
+
+Hermitian Operators ($\hat{Q}$) gives averages by:
+
+\[ \langle Q \rangle = \int_{-\infty}^{\infty}\Psi^* \hat{Q}\Psi dx\]
+
+Common operators include:
+
+\begin{align*}
+    \hat{x} &= x \\
+    \hat{P} &= \frac{\hbar}{i} \dfrac{\partial}{\partial x}\\
+    \hat{H} &= \frac{\hbar^2}{2m}\frac{\partial^2}{\partial x^2} + V
+\end{align*}
+Quantum operators can be constructed from classical ones (Correspondence Principle).
+
+Hermitian Operators guarantees that the eigenvalue is real (see LinAlg). The definition is:
+\begin{align*}
+    \langle f|Qg \rangle &= \langle Qf | g \rangle\\
+    \int f^* \hat{Q}g dx &= \int (Qf)^* g dx
+\end{align*}
+
+This is because real outcomes have equivalent conjugates and conjugating the inner product 'flips' the order $\langle \Psi | Q\Psi \rangle = \langle Q\Psi | \Psi \rangle$.
+
+
+A lot of other properties can be shown with tricks such as:
+\begin{itemize}
+    \item Taking the conjugate of Schrodinger's Equation
+    \item Using integral by parts and noting that the wavefunction vanishes at infinity
+    \item Operators are eigenfunction problems
+\end{itemize}
+
+\section{Classic Systems}
+
+\subsection{Infinite Square Well}
+
+Here, the potential is given by:
+\[
+V(x) =
+\left.
+\begin{cases}
+0, & \text{if } 0 \leq x \leq a,\\
+\infty, & \text{otherwise}
+\end{cases}
+\right.
+\]
+
+Thus, the TISE must fall to zero outside the well (normalisable condition). Inside:
+
+\[ \frac{-\hbar^2}{2m}\frac{d^2\psi}{dx^2} = E\psi\]
+
+Letting $k = \frac{\sqrt{2mE}}{\hbar}$:
+\[ \psi(x) = A\sin{kx}+B\cos{kx} \]
+
+The boundary condition is the wavefunction goes to zero once it `exits' the well (The first derivative does not have a boundary condition because the potential goes to infinity, which represents a discrete case).
+
+For both cases:
+\begin{align*}
+    0 &= B\cos{0} \implies B = 0\\
+    0 &= A\sin{ka}\\
+\end{align*}
+
+This means that $ka = n\pi$, so $k = \frac{n\pi}{a}$. Based on $k$'s definition: 
+\[E_n = \frac{\hbar^2 n^2 \pi^2 }{2ma}\]
+
+Normalising:
+\begin{align*}
+    \int_0^a A^2&\sin^2{\frac{n\pi x}{a}} = 1\\
+    A &= \sqrt{\frac2a}
+\end{align*}
+
+Thus, the wavefunction is discrete with discrete energy levels:
+\[\boxed{\psi_n(x) = \frac{2}{a}\sin\left({\frac{n\pi x}{a}}\right)}\]
+
+
+\subsection{Harmonic Oscillator}
+The potential is given by:
+\[ V(x) = \frac12 m\omega^2x^2\]
+This is a common potential, because by Taylor expanding a potential around a point, the neighbourhood around the local minimum can always be approximated by a harmonic potential. 
+
+\[V(x)|_{x=x_0} = V(x_0) + V'(x_0)(x-x_0) + \frac12 V''(x_0)(x-x_0)^2 + ...\]
+The first derivative is zero because it is a local minimum, and $V(x_0)$ is an arbitrary constant which can be `discarded'.
+
+Thus, the TISE is:
+\[\frac{-\hbar^2\psi}{2m} + \frac12 m\omega^2x^2 = E\psi\]
+
+There are two ways to solve it. The analytical (hardcore) way is assuming a solution and solving by Frobenius Method. The other method is by ladder operators of the form:
+\[\boxed{a_\pm = \frac{1}{\sqrt{2\hbar m \omega}}\left(\mp ip + m\omega x\right)}\]
+The Schrodinger Equation can be rewritten based on the operators, and with a bottom rung (ground state):
+\[\psi_0(x) = (\frac{m\omega}{\pi\hbar})^\frac14 e^{-\frac{m\omega}{2\hbar}x^2}, \quad E_0 = \frac12 \hbar \omega \]
+
+By showing that the ladder operator is a Hermitian Conjugate and some fancy algebra:
+
+\[\boxed{\psi_n(x) = \frac{1}{\sqrt{n!}} (a_+)^n \psi_0(x), \quad E_n = \left(n+\frac12\right) \hbar \omega}\]
+
+Using the analytical method gives a solution given with the \textbf{Hermite Polynomials}:
+\[\boxed{\psi_n(x) = \left(\frac{mw}{\pi\hbar}\right)^{\frac14}\frac{1}{\sqrt{2^nn!}}H_n(\xi)e^{-\xi^2/2}}\]
+Here, $\xi = \sqrt{\frac{m\omega}{\hbar}}x$.
+
+\subsection{Free Particle}
+There are no potential, so the TISE is:
+\[ -\frac{\hbar^2}{2m} \frac{d^2\psi}{dx^2} = E\psi\]
+
+Again, let $k \equiv \frac{\sqrt{2mE}}{\hbar}$, so $E = \frac{\hbar^2k^2}{2m}$. The solution is identical to within the infinite square well, but the solution shall be written in terms of exponential so when taking on time dependence a fixed wave function can be seen:
+\begin{align*}
+    \psi(x) &= Ae^{ikx} + Be^{-ikx}\\
+    \Psi(x,t) &= Ae^{ik(x - \frac{\hbar k}{2m}t)} + Be^{-ik(x + \frac{\hbar k}{2m} t)}
+\end{align*}
+
+In general, trigonometric functions are used for \textbf{standing waves}, whereas complex exponential functions are used for \textbf{travelling waves.}
+
+Without boundaries, this is not normalisable. However, the solution is still given by an integral over separable solutions (similar to the discrete sums earlier):
+\[\boxed{\Psi(x,t) = \frac{1}{2\pi}\int^{+\infty}_{-\infty}\phi(k)e^{i(kx-\frac{\hbar k^2}{2m}t)}dk}\]
+
+Or more generally:
+\[ \Psi_k(x,t) = Ae^{i(kx-\frac{\hbar k^2}{2m}t)} \quad \text{with} \quad 
+\left.
+\begin{cases}
+     k > 0 &\implies \text{right}\\
+    k < 0 &\implies \text{left} 
+\end{cases}
+\right.
+\]
+
+
+Since the wave function is given as $f(x\pm vt)$, the speed of the wave is the coefficient of $t$ divided by that of $x$, but the classical wave speed would be based on the kinetic energy, which introduces a contradiction.
+
+
+Given $\Psi(x,0)$:
+\[ \Psi(x,0) = \frac{1}{2\pi}\int^{+\infty}_{-\infty}\phi(k)e^{ikx}dk\]
+
+Thus, $\psi(k)$ is given by the Fourier Transform of $\Psi{x,0}$:
+
+\[\phi(k) = \frac{1}{2\pi}\int^{+\infty}_{-\infty}\Psi(x,0)e^{-ikx}dk\]
+
+Thus, there would be a group velocity and phase velocity: 
+
+\[
+\begin{matrix}
+v_{\text{group}} = \frac{d\omega}{dk} & v_{\text{phase}} = \frac{\omega}{k}
+\end{matrix}
+\]
+
+\paragraph{Particle Beam}
+This function is derived using the time derivative of probability, thus representing a 'beam' of particle or probability current:
+
+\[\Gamma(x) = -\frac{i\hbar}{2m}(\psi^*\frac{d\psi}{dx} - \psi \frac{d\psi*}{dx})\]
+
+\subsection{Dirac Function Well}
+
+\subsubsection{The Maths}
+First make the distinction between bound and scattering states. Given most potentials are zero at infinity: 
+\[
+\left.
+\begin{cases}
+E > 0 &\implies \text{Scattering}\\
+E < 0 &\implies \text{Bounded}
+\end{cases}
+\right.
+\]
+
+The \textbf{Dirac Delta function} is given by:
+
+\[
+\delta(x) = 
+\left.
+\begin{cases}
+0, \quad &\text{if} \;\; x \neq 0\\
+\infty, \quad &\text{if}\;\; x = 0
+\end{cases}
+\right\}, \qquad \text{with} \int^{+\infty}_{-\infty} \delta(x) dx = 1
+\]
+
+\subsubsection{The Physics}
+Consider a potential:
+\[V(x) = -\alpha \delta(x)\]
+
+The TISE is:
+
+\[-\frac{\hbar^2\psi}{2m} -\alpha \delta(x) = E\psi\]
+
+\paragraph{Bound States}
+At $x \neq 0$, because $E< 0$:
+\[\frac{d^2\psi}{dx^2}=-\frac{2mE}{\hbar^2}=\kappa^2\psi\]
+Where $\kappa \equiv \frac{\sqrt{-2mE}}{\hbar}$.
+The solution is:
+\[ \psi(x) = Ae^{-\kappa x} + Be^{\kappa x}\]
+
+The boundary conditions:
+\begin{enumerate}
+    \item Left: as $x$ approaches $-\infty$, the wavefunction must go to zero
+    \item Right: as $x$ approaches $+\infty$, the wavefunction must go to zero
+    \item Wavefunction must be continous
+    \item First derivative of wavefunction must be continous except at where potential is infinite
+\end{enumerate}
+
+Thus, based on the first three conditions:
+\[ 
+\psi(x) = \left.
+\begin{cases}
+Be^{\kappa x}, \quad & x \leq 0,\\
+Be^{-\kappa x}, \quad & x \geq 0
+\end{cases}
+\right.
+\]
+The discontinuity of the derivative can be obtained by integrating the TISE from $-\epsilon$ to $+\epsilon$ and taking the limit \(\lim_{\epsilon\to0}\):
+\[-\frac{\hbar^2}{2m}\int^{+\epsilon}_{-\epsilon}\frac{d^2\psi}{dx^2}+\int^{+\epsilon}_{-\epsilon}V(x)\psi(x)dx = E\int^{+\epsilon}_{-\epsilon}\psi(x)\]
+Which means:
+\[\Delta(\frac{d\psi}{dx}) = \frac{2m\alpha}{\hbar^2}\psi(0)\]
+
+This solves for: 
+\[\kappa = \frac{m\alpha}{\hbar^2}\]
+Which, upon substitution and normalisation:
+\[ \boxed{\psi(x) = \frac{\sqrt{m\alpha}}{\hbar}e^{-m\alpha|x|/\hbar}, \qquad E = -\frac{m\alpha^2}{2\hbar^2}}\]
+
+\paragraph{Scattering States}
+For $x\neq 0$, essentially free particle:
+\[ 
+\psi(x) = 
+\left.
+\begin{cases}
+Ae^{ikx} + Be^{-ikx}, \qquad & x<0\\
+Fe^{ikx} + Ge^{-ikx}, \qquad & x> 0\\
+\end{cases}
+\right.
+\]
+The derivatives are:
+\[ \frac{d\psi}{dx} =
+\left.
+\begin{cases}
+ik(Ae^{ikx} -Be^{-ikx}), \qquad & x<0, \qquad \frac{d\psi}{dx}|_{-0} = ik(A-B)\\
+ik(Fe^{ikx} - Ge^{-ikx}), \qquad & x> 0, \qquad \frac{d\psi}{dx}|_{+0} = ik(F-G)\\
+\end{cases}
+\right.
+\]
+
+Thus, using the discontinuity condition:
+\[ik(F-G-A+B) = -\frac{2m\alpha}{\hbar^2}(A+B)\] 
+Letting \(\beta \equiv \frac{m\alpha}{\hbar^2k}\):
+\[ F - G = A(1+2i\beta) - B (1 - 2i\beta)\]
+This is an unnormalisable function (free particle) with 5 unknowns. That said, physical intuition can be gained by noticing that the coefficients are the amplitudes of the waves:
+\begin{enumerate}
+    \item $A$ is wave from left to well
+    \item $B$ is wave from well to left
+    \item $F$ is wave from well to right
+    \item $G$ is wave from right to well
+\end{enumerate}
+Thus, $A$ represents the \textbf{incident wave}, $B$ represents the \textbf{reflected wave}, and $F$ represents the \textbf{transmitted wave}. Thus the probabilities are given by:
+\[R \equiv \frac{|B|^2}{|A|^2} \qquad T \equiv \frac{|F|^2}{|A|^2}\]
+
+\paragraph{Dirac Delta Function Barrier}
+A barrier can be made by flipping the potential $V = \alpha \delta(x)$. This kills the bound state, but the scattering states remain unchanged (relates to $\alpha^2$).
+
+
+
+
+\subsection{Finite Well}
+
+The pesky brother of the infinite square well. The potential is given by:
+\[
+V(x) = 
+\left.
+\begin{cases}
+-V_0, \qquad & \text{for } -a < x < a\\
+0, \qquad & \text{for } |x| > a
+\end{cases}
+\right.
+\]
+
+\paragraph{Bound States}
+At $x<-a$ and $x>a$ it is identical to the non well area of the Dirac Function Well. 
+\[
+\psi(x) = 
+\begin{cases}
+Be^{\kappa x}, \qquad & \text{for } x<-a,\\
+Fe^{-\kappa x}, \qquad & \text{for } x> a
+\end{cases}
+\]
+With: \[\kappa \equiv \frac{\sqrt{-2mE}}{\hbar} \]
+Whereas in the well region $-a<x<a$, $V(x)=-V_0$, so the TISE:
+\[-\frac{\hbar^2\psi}{2m}-V_0\psi=E\psi\]
+Then letting:
+\[l \equiv \frac{\sqrt{2m(E+V_0)}}{\hbar}\]
+The solution would be:
+\[\psi(x) = C\sin{(lx)} + D\cos{(lx)}\]
+Since the potential is symmetric, the wavefunction is either even or odd. 
+
+For even:
+\[
+\psi(x) = 
+\left.
+\begin{cases}
+Fe^{-\kappa x}, \qquad& \text{for } x> a,\\
+D\cos{(lx)}, \qquad& \text{for } 0 < x <a,\\
+\psi(-x), \qquad& \text{for } x < 0
+\end{cases}
+\right.
+\]
+
+Because the wavefunction is even, only one side of boundary conditions have to be considered:
+
+\begin{enumerate}
+    \item Continuity of $\psi(x)$: At $x=a$, \(D\cos{(la}) = Fe{-\kappa x}\)
+    \item Continuity of derivative: At $x=a$, \(-lD\sin{(la)} = -\kappa Fe^{-\kappa a}\)
+\end{enumerate}
+Dividing the two, \[\kappa = l\tan{(la)}\]
+Letting:
+
+\[
+z \equiv la  \text{ and } z_0 \equiv  \frac{a}{\hbar}\sqrt{2mV_0}
+\]
+
+From $(\kappa^2 + l^2) = \frac{2mV_0}{\hbar^2}$, multiplying both sides by $a^2$ shows that $\kappa a = \sqrt{z_0^2 - z^2}$. Multiplying the original equation by $a$ and rearranging yields:
+
+\[\boxed{\tan{(z)} = \sqrt{\left(\frac{z_0}{z}\right)^2 - 1}}\]
+
+Which is a transcendental equation that has to be solved computationally/numerically/graphically.
+
+\paragraph{Scattering States}
+
+The wave travels from the left, goes into the well, and then leaves. There cannot be waves coming in from the right, so:
+
+\[
+\psi(x) = 
+\left.
+\begin{cases}
+Ae^{ikx} + Be^{-ikx}, &\qquad \text{for } x < -a,\\
+C\sin{(lx)} + D\cos{(lx)}, &\qquad \text{for } -a < x < a,\\
+Fe^{ikx}, &\qquad \text{for } x > a;
+\end{cases}
+\right.
+\]
+
+Where:
+
+\[ k \equiv \frac{\sqrt{2mE}}{\hbar} \qquad l \equiv \frac{\sqrt{2m(E+V_0}}{\hbar}\]
+
+The four boundary conditions are:
+\begin{enumerate}
+    \item Continuity at $-a$: \[Ae^{-ika}+Be^{ika} = -C\sin{(la)} + D\cos{(la)}\]
+    \item Continuity at $+a$:
+    \[C\sin{(la)} + D\cos{(la)} = Fe^{ika}\]
+    \item Derivative continuity at $-a$:
+    \[ik(Ae^{-ika}-Be^{ika}) = l(C\cos{(la)} + D\sin{(la)})\]
+    \item Derivative continuity at $+a$:
+    \[l(C\cos{(la)} - D\sin{(la)}) = ikFe^{ika}\]
+\end{enumerate}
+First solve for $C$ and $D$ in terms of $F$. Then solve for the remaining. Again $T = |F|^2/|A|^2$, in which case:
+\[T^{-1} = 1 + \frac{V_0^2}{4E(E+V_0)}\sin^2{\left(\frac{2a}{\hbar}\sqrt{2m(E+V_0})\right)}\]
+When sine is zero, perfect transmission occurs. This occurs precisely at the permitted energies of the infinite square well.
+
+
+
+\subsection{Piece-wise potentials}
+
+The above systems can be combined to form different step-wise or piece-wise potentials. Write the wavefunction/TISE in different potentials and `join' them together by noting the boundary conditions.
+
+\subsection{Periodic Potentials}
+
+\subsubsection{Bloch's Theorem}
+A periodic potential `repeats' itself: \[V(x+a) = V(x)\]
+
+
+\textbf{Bloch's Theorem} states that solutions to such a potential are in the form of:
+\[\boxed{\psi(x+a) = e^{iKa}\psi(x)}\]
+Where $K$ is a constant independent of $x$.
+
+
+This can be proved with a displacement operator: $Df(x) = f(x+a)$ and noting that it commutes with the Hamiltonian: $[D,H] = 0$, and expressing the eigenvalue as a complex number: $e^{iKa}$. This theorem allows for the probability to be periodic:
+\[|\psi(x+a)|^2 = |e^{ika}|^2|\psi(x)|^2 = |\psi(x)|^2\]
+
+
+There is one more boundary condition to impose. The potential is assumed to `wrap around', so the wavefunction becomes:
+\[\psi(x+Na) = \psi(x)\]
+Using Bloch's Theorem on the left:
+\[e^{iKNa}\psi(x) = \psi(x)\]
+
+This means: \(KNa = 2n\pi\), and:
+\[ K = \frac{2n\pi}{Na}\]
+Knowing $K$, only $\psi(x)$ needs to be solved and each subsequent cell's wavefunction can be generated.
+
+\subsubsection{Dirac Comb}
+For a potential of:
+\[ V(x) = V_0\sum_{n=0}^{N-1}\delta(x-na)\]
+Investigate the behaviour of a single cell. This is similar to the Dirac Well except here it is a barrier. Thus, with $k \equiv \frac{\sqrt{2mE}}{\hbar}$ and from $0<x<a$:
+\[\psi(x) = A\sin{(kx)} + B\cos{(kx)} \]
+To the left of $x=0$, Bloch's Theorem states:
+\[ \psi_{-}(x) = e^{-iKa}(A\sin{(k(x+a))} + B\cos{(k(x+a))}\]
+
+The Boundary Conditions are:
+\begin{enumerate}
+    \item Continuity of wavefunction:
+    \[B = e^{-iKa}(A\sin{(ka)} + B\cos{(ka)}\]
+    \item Derivative discontinuity:
+    \[kB - e^{-iKa}(A\cos{(ka)} - B\sin{(ka)})=\frac{2mV_0}{\hbar^2}B\]
+\end{enumerate}
+
+Both equations lead to:
+\[\cos{(Ka)} = \cos{ka} +\frac{m\alpha}{\hbar^2k}\sin{(ka)}\]
+
+Determining $k$ (and hence $E$), let:
+\[ z \equiv ka \qquad \beta \equiv \frac{m\alpha a}{\hbar^2}  \qquad f(z) = \cos{(Ka)}\]
+
+Then:
+
+\[f(z) = \cos{(z)} +\beta\frac{\sin{(z)}}{z}\]
+
+Here, $\beta$ represents the `strength' of the well, and $f(z)$ can only take values between $[-1,1]$, so there are only certain allowed band of energies. This explains phenomenon of insulators, conductors and semiconductors.
+
+
+
+\subsection{Properties of Symmetric Potentials}
+\begin{enumerate}
+    \item Alternate in even and odd
+    \item Successive states means one more node (zero crossing)
+    \item Orthonormal: \(\langle\psi_m|\psi_n\rangle = \delta_{mn}\)
+    \item Complete: \( f(x) = \sum_n c_n \psi_n(x)\)
+\end{enumerate}
+Using `Fourier's Trick':
+\[\boxed{c_n = \langle \psi_n | f(x) \rangle  = \int \psi_n^* f(x) dx}\]
+
+Letting the initial state, $\Psi(x,0) = f(x)$ and the above trick can be used to determine the coefficients. Then slapping on the time evolution would yield $\Psi(x,t)$.
+
+
+
+\section{3 Dimensional Systems}
+
+The Schrodinger Equation would now be written in terms of the gradient:
+\[\boxed{i\hbar\frac{\partial \Psi}{\partial t} = -\frac{-\hbar^2}{2m}\nabla^2 \Psi + V \Psi}\]
+\subsection{3D square well}
+Use separation of variables (SoV) and solve it as three 1D problems. Shall be trivial.
+
+\subsection{3D Spherical Potential}
+
+The Laplacian in Spherical coordinates is given by:
+
+\[\nabla^2 = \frac{1}{r^2}\frac{\partial }{\partial r}\left(r^2\frac{\partial }{\partial r}\right) + \frac{1}{r^2\sin{\theta}}\frac{\partial}{\partial \theta}\left(\sin{\theta}\frac{\partial}{\partial \theta}\right) + \frac{1}{r^2\sin^2{\theta}}\left(\frac{\partial^2}{\partial \phi^2}\right) \]
+
+The TISE would then be solved by using SoV twice: first in separating the radial and angular parts with separation constant $l(l+1)$, then in separating the azimuthal ($\phi$) and elevation ($\theta$) angles with constant $m^2$. Thus, the solutions are:
+
+\[\psi(r, \theta, \psi) = R(r) Y(\theta,\phi) = R(r)\Theta(\theta)\Phi(\phi)\]
+
+\paragraph{Azimuthal}
+The equation is simply:
+\[ \frac{d^2\phi}{d\phi^2} = -m^2\phi\]
+So the solutions are simply:
+\[\boxed{\Phi(\phi) = e^{im\phi}}\]
+Where $m$ is allowed to run negative.
+
+
+\paragraph{Altitude}
+The equation is given by:
+\[ \sin{\theta}\frac{d}{d\theta}\left(\sin{\theta}\frac{d\Theta}{d\theta}\right) + [l(l+1)\sin^2{\theta}-m^2]\Theta=0\]
+Thus the solutions are given by \textbf{Associated Legendre Polynomials}:
+\[\boxed{\Theta(\theta) = AP^m_l(\cos{\theta})}\]
+These are given by \textbf{Rodrigues formula}:
+\begin{align*}
+    P^m_l(x) &= (1-x^2)^{|m|/2}\left(\frac{d}{dx}\right)^{|m|}P_l(x)\\
+    P_l(x) &= \frac{1}{2^ll!}\frac{d^l}{dx^l}(x^2-1)^l
+\end{align*}
+
+Thus, $l$ must be a nonnegative integer, and $|m| < l$, so:
+\[ l = 0,1,2,...; \quad m = -l,-l+1,...,-1,0,1...,l-1,1\]
+
+Here, $l$ is known as the \textbf{azimuthal quantum number} and $m$ as the \textbf{magnetic quantum number}.
+
+Normalising:
+\[\int^{2\pi}_0\int^{\pi}_{0}|Y|^2\sin\theta d\theta d\phi = 1\]
+
+The full solution for the angular part is known as \textbf{Spherical Harmonics}:
+
+\[Y^m_l(\theta,\phi) = (-1)^m\sqrt{\frac{(2l+1)}{4\pi}\frac{(l-|m|)!}{(l+|m|)!}}e^{im\phi}P^m_l(\cos\theta)\]
+
+\paragraph{Radial}
+
+This is given by the equation:
+\[\frac{d}{dr}(r^2\frac{dR}{dr}) - \frac{2mr^2}{\hbar^2}[V(r)-R]R = l(l+1)R\]
+
+By a change of variables: 
+\[u(r) \equiv rR(r)\]
+
+The equation becomes:
+
+\[-\frac{\hbar^2}{2m}\frac{d^2u}{dr^2} + \left[V + \frac{\hbar^2}{2m}\frac{l(l+1)}{r^2}\right]u=Eu\]
+
+The normalising condition becomes: 
+\[\int_0^\infty|u|^2dr = 1\]
+
+This can be solved given a specific potential $V$.
+
+\subsection{Hydrogen Atom}
+
+The Hydrogen atom can be solved analytically. Solving the radial parts give the allowed energies of the hydrogen. (\texttt{TODO})
+
+\subsection{Angular Momentum}
+\subsubsection{Eigenvalues and Operators}
+
+Angular momentum is given by:
+
+\[\mathbf{L} = \mathbf{r} \times \mathbf{p}\]
+
+In general, the respective components of angular momentum does not commute:
+
+\[[L_x, L_y] = i\hbar L_z; \qquad [L_y, L_z] = i\hbar L_x; \qquad [L_z,L_x] = i\hbar L_y.\]
+
+However, the square of the total angular momentum $L^2$ commutes:
+\[L^2 = L_x^2 + L_y^2 + L_z^2\]
+
+Due to:
+\[[L^2, \mathbf{L}] = 0\]
+
+This means they share simultaneous eigenstates:
+
+\[L^2f = \lambda f \qquad L_zf = \mu f\]
+
+If a ladder operator is introduced:
+
+\[L_\pm \equiv L_y \pm iL_x\]
+
+The commutators would be:
+
+\begin{align*}
+ [L_z, L_\pm] &= \pm\hbar(L_x \pm iL_y) = \pm\hbar L_\pm\\
+ [L^2, L_\pm] &= 0
+\end{align*}
+
+As $L^2$ and $L_\pm$ commutes, the order of applying the operators does not matter:
+
+\[L^2(L_\pm f) = L_\pm(L^2 f) = L_\pm(\lambda f) = \lambda (L_\pm f)\]
+
+So  $L_\pm f$ is \textit{also} an eigenfunction of $L^2$ with the same eigenvalue. 
+
+Based on the commutator described above:
+\begin{align*}
+    L_z(L_\pm f) &= L_\pm (L_z f) \pm \hbar  L_\pm f \\
+    &= L_\pm (\mu f) \pm \hbar L_\pm f\\
+    &= (\mu \pm \hbar) L_\pm f
+\end{align*}
+
+There must be a top and bottom rung:
+
+\[ L_- f_b = 0 \qquad L_+ f_t = 0\]
+
+Set $\hbar l_t$ and $\hbar l_b$as the eigenvalue for the top and bottom rung of $L_z$ respectively, then:
+
+\[
+\begin{matrix}
+L_z f_t = \hbar l_t f_t; &\quad& L^2f_t = \lambda_t f_t\\
+L_z f_b = \hbar l_b f_b; &\quad& L^2f_b - \lambda_b f_b
+\end{matrix}
+\]
+
+Construct an operator $L_\pm L_\mp$:
+
+\begin{align*}
+    L_\pm L_\mp &= (L_x\pm i L_y)(L_x\mp iL_y) = L_x^2 + L_y^2 \mp i(i\hbar L_z)\\
+    &= L^2 - L_z^2 \pm(\hbar L_z)\\
+    \therefore L^2 &= L_\pm L_\mp + L_z^2 \mp(\hbar L_z)
+\end{align*}
+
+For the top rung, use the bottom relation:
+
+\begin{align*}
+    L^2 f_t &= (L_-L_+ + L_z^2 + \hbar L_z)f_t\\
+    &= (0 + \hbar^2 l_t^2 + \hbar^2 l)f_t\\
+    \therefore \lambda_t &= \hbar^2 l_t(l_t+1)
+\end{align*}
+
+For the bottom rung, use the top relation:
+
+\begin{align*}
+    L^2 f_b &= (L_+ L_- +L_z^2 -\hbar L_z)f_b\\
+    &= (0 + \hbar^2 l_b^2 -\hbar^2 l_b ) f_b\\
+    \therefore \lambda_b &= \hbar^2l_b(l_b-1)
+\end{align*}
+
+$L^2$ is the same for top and bottom (max and min basically):
+
+\begin{align*}
+    \lambda_b &= \lambda_t\\
+    \hbar^2l_b(l_b-1)& = \hbar^2l_t(l_t-1)\\
+    l_b(l_b-1) &= l_t(l_t+1)\\
+    \therefore l_b &= -l_t
+\end{align*}
+Other results are absurd as it implies the top rung is lower than the bottom rung. 
+
+The operators shifts the eigenvalues in discrete, integer values. Since the eigenvalue for $L_z$ goes between $[-l,l]$ in $N$ steps, $l=N/2$ and so $l$ is an \textit{integer or half-integer}. Then:
+
+\[\boxed{L^2 f^m_l = \hbar^2l(l+1)f^m_l; \quad L_zf^m_l = m\hbar f_l^m}\]
+
+Where:
+\[ l = 0,\frac12,1,\frac32,... \qquad \qquad m = -l, -l+1,...,l-1,l\]
+
+\subsubsection{Eigenfunctions}
+
+The gradient in spherical coordinates were established eariler. The momentum operator is $\mathbf{P} = \frac{\hbar}{i}\nabla$, which means the angular momentum operator is $\mathbf{L} = (\frac{\hbar}{i})(\mathbf{r}\times \nabla)$ and as $\mathbf{r} = r \vec{r}$:
+
+\begin{align*}
+    \mathbf{L} &= \frac{\hbar}{i}\left[
+r\underset{= 0}{(\vec{r}\times\vec{r})}\frac{\partial}{\partial r} + \underset{=\vec{\phi}}{(\vec{r}\times\vec{\theta})}\frac{\partial}{\partial\theta} + \underset{=-\vec{\theta}}{(\vec{r}\times\vec{\phi})}\frac{1}{\sin\theta}\frac{\partial}{\partial\phi}
+\right]\\
+&= \frac{\hbar}{i}\left[ \vec{\phi}\frac{\partial}{\partial\theta} -\vec{\theta} \frac{1}{\sin\theta}\frac{\partial}{\partial\phi}\right]
+\end{align*}
+
+Translating the unit angle vectors to Cartesian vectors:
+
+\begin{align*}
+    L_x &= \frac{\hbar}{i}(-\sin\phi \frac{\partial}{\partial\theta} -\cos\phi \cos\theta \frac{\partial}{\partial \phi})\\
+    L_y &= \frac{\hbar}{i}(+\cos\phi\frac{\partial}{\partial\theta}-\sin\phi\cot\theta\frac{\partial}{\partial \phi})\\
+    &\boxed{L_z =\frac{\hbar}{i}\frac{\partial}{\partial \phi} }
+\end{align*}
+
+$L^2$ can be constructed with the $L\pm$ operators, constructed by the equations above:
+
+\[\boxed{
+L^2 = -\hbar^2\left[\frac{1}{\sin\theta}\frac{\partial}{\partial\theta}(\sin\theta\frac{\partial}{\partial\theta})+\frac{1}{\sin^2\theta}\frac{\partial^2}{\partial\phi^2}\right]
+}\]
+
+Combining the operators with the aforementioned eigenvalues would create equations equivalent to those in 3D angular equations. Thus, \textbf{Spherical Harmonics} are eigenfunctions to the momentum operators.
+
+
+\section{Pertubation Theory}
+
+Begin by having a solved TISE:
+\[ H^0\psi^0_n = E^0_n\psi^0_n\]
+
+Then introduce a small pertubation in the system, so there are new eigenfunctions and eigenvalues:
+
+\[H\psi_n = E_n\psi_n\]
+
+To begin, write the new Hamiltonian as a combination of the new ($H'$) and old ($H^0$):
+
+\[H = H^0 + \lambda H'\]
+
+The constant $\lambda$ varies from 0 to 1: 1 is when the pertubation is completely `switched on'. Expand the eigenfunction and energy eigenvalue as a power series:
+\begin{align*}
+  \psi_n &= \psi^0_n + \lambda \psi^1_n + \lambda^2 \psi^2_n + ...  \\
+  E_n &= E^0_n + \lambda E^1_n + \lambda^2 E^2_n+...
+\end{align*}
+Where the superscript represent the order corrections. For example, $E^1_n$ and $\psi^1_n$ is the \textbf{first-order correction}.
+
+The eigenvalue equation now reads: 
+\begin{align*}
+    (H^0 + \lambda H') &[\psi^0_n + \lambda \psi^1_n + \lambda^2 \psi^2_n + ...]  \\&=
+  (E^0_n + \lambda E^1_n + \lambda^2 E^2_n+...)[\psi^0_n + \lambda \psi^1_n + \lambda^2 \psi^2_n + ...]
+\end{align*}
+Collecting in powers of $\lambda$:
+\begin{align*}
+    H^0\psi^0_n + \lambda(H^0\psi^1_n+ H'\psi^0_n) & + \lambda^2(H^0 \psi^2_n +H'\psi^1_0) +...  \\&=
+  E^0_n\psi^0_n  + \lambda(E^0_n\psi^1_n + E^1_n\psi^0_n ) +\lambda^2(E^0_n\psi^2_n + E^1_n\psi^1_n +E^2_n\psi^0_n )+...
+\end{align*}
+Zero order is the original system: \[H^0\psi^0_n=E^0_n\psi^0_n\]
+
+First order:
+
+\[H^0\psi^1_n+ H'\psi^0_n=E^0_n\psi^1_n + E^1_n\psi^0_n\]
+
+Second order:
+\[H^0 \psi^2_n +H'\psi^1_0=E^0_n\psi^2_n + E^1_n\psi^1_n +E^2_n\psi^0_n \]
+
+\subsection{First Order}
+\paragraph{Correction to Energy}
+Multiply by the conjugate of original wavefunction $\psi^0_n$ and integrating:
+\[\langle\psi^0_n|H^0\psi^1_n\rangle+ \langle \psi^0_n|H'\psi^0_n\rangle=E^0_n\langle\psi^0_n|\psi^1_n\rangle + E^1_n\langle\psi^0_n|\psi^0_n\rangle\]
+
+$H^0$, the original Hamiltonian, is Hermitian, so: \(\langle\psi^0_n|H^0\psi^1_n\rangle = \langle H^0\psi^0_n|\psi^1_n\rangle\), which is also equal to:
+\[\langle H^0\psi^0_n|\psi^1_n\rangle = \langle E^0_n\psi^0_n|\psi^1_n\rangle =E^0_n\langle\psi^0_n|\psi^1_n\rangle \]
+Furthermore, $\langle\psi^0_n|\psi^0_n\rangle = 0$
+This means:
+
+\[\boxed{E^1_n = \langle\psi^0_n|H'|\psi^0_n\rangle}\]
+
+This means the first order correction to energy is the \textit{expectation value of the unperturbed (original) states}.
+
+Remember that when solving problems, $H'$ is the pertubation, or the \textit{change} in Hamiltonian.
+
+\paragraph{Correction to Wavefunction}
+
+Rewrite the first order correction to:
+\[(H^0- E^0_n)\psi^1_n=-(H'-E^1_n)\psi^0_n\]
+
+RHS is a known function. The wavefunction on the left can be expressed as a linear combination of the unperturbed wavefunction:
+
+\[\psi^1_n = \sum_{m\neq n}c_M^{(n)}\psi^0_m\]
+
+Which means the equation can be expressed as:
+
+\[\sum_{m\neq n} (E^0_m-E^0_n)c_m^{(n)}\psi^0_m = -(H'-E^1_n)\psi^0_n\]
+Taking the inner product:
+\[\sum_{m\neq n} (E^0_m-E^0_n)c_m^{(n)}\langle\psi_l^0|\psi^0_m\rangle = -\langle\psi^0_l|H'|\psi^0_n\rangle+E^1_n\langle\psi^0_l|\psi^0_n\rangle\]
+
+If $l = n$, LHS is zero and the energy correction is recovered. If $l\neq n$:
+\begin{align*}
+    (E^0_m - E^0_n)c^{(n)}_m &= -\langle\psi^0_l|H'|\psi^0_n\rangle\\
+    \therefore c^{(n)}_m &= \frac{\langle\psi^0_l|H'|\psi^0_n\rangle}{(E^0_n- E^0_m)}
+\end{align*}
+Which means the corrected eigenfunction is:
+\[\boxed{\psi^n_1 = c^{(n)}_m = \sum{m\neq n}\frac{\langle\psi^0_l|H'|\psi^0_n\rangle}{(E^0_n- E^0_m)}\psi^0_n}\]
+
+Note that there cannot be degenerate states (same energies shared by different states). Furthermore, while the energy correction is often quite accurate, the wavefunctions are quite bad.
+
+
+
+
+
+\end{document}

@@ -1,0 +1,193 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[a4paper, total={6.5in, 9.5in}]{geometry}
+
+
+
+\title{Important Equations Y2}
+\author{Kelvin Ho}
+\date{April 2021}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+Below are a list of important equations in Mathematics taught in year 2.
+
+
+
+\section{Ordinary Differential Equation}
+
+\subsection{Frobenius Method}
+Solve ODE by assuming a solution in the form of: \[y = \sum_{n=0}^{\infty} a_n x^n\]
+
+More generally:
+\[y = \sum_{n=0}^{\infty} a_n x^{n+s}\]
+Where by checking for the first term by setting $n=0$, an indicinal equation can be created. 
+
+\paragraph{Fuchs's Theorem}
+
+For an ODE of the form:
+\[ y'' + f(x)y' + g(x) y = 0\]
+
+If $x^2g(x)$ and $xy(x)$ are expandable in convergent power series, this is a \textbf{regular singularity} at the point of expansion (in this case the origin). These conditions are necesary and sufficient for the general solution to consist of:
+\begin{enumerate}
+    \item 2 Frobenius series
+    \item 1 Frobenius series and the other $S_1(x)ln(x) + S_2(x)$, if $s$ are equal or differs by integer amount (not always).
+\end{enumerate}
+
+Alternatively, if one solution $u(x)$ is known, try \[y = uv \]
+
+
+\subsubsection{Legendre Equation}
+
+\paragraph{}
+Arise in the PDE of spherical coordinates. Applications include Electrodynamics and Quantum Mechanics. 
+
+\[ (1-x^2)\frac{d^2y}{dx^2} - 2x\frac{dy}{dx} + l(l-1) y = 0\] 
+
+Or more succinctly:
+\[ \frac{d}{dx}[(1-x^2)y'] + l(l-1) y = 0\] 
+
+The solutions are given as \textbf{Legendre Polynomials} $P_l(x)$, where $P_l(1) = 1$.
+
+
+\paragraph{Rodrigues' Formula}
+Derive it using Lebiniz's Rule for Differentiating Products, which is similar to the Binomial Expansion.
+
+\[P_l(x) = \frac{1}{2^ll!}\frac{d^l}{dx^l}(1-x^2)^l\]
+
+\paragraph{Generating function}
+Useful for making additional recursion relations, derived by taking derivative of generating function with respect to $h$. Potential functions can also be written in the form of this function because of Cosine rule, so expanding it gives different 'poles' representing the function to different levels of accuracy.
+\[ \Phi (x,h) = \sqrt{1 - 2xh + h^2}^{-1}\]
+
+
+\paragraph{Orthonormal Basis}
+The Legendre Polynomials form an orthonormal basis over [-1,1] which can be further normalised. This can be derived from making writing the ODE in $m$ and $l$, multiplying each by the Legendre Polynomial in the other order and subtracting.
+
+\[ \langle P_l(x)|P_m(x)\rangle = \int^1_{-1} P_l(x)P_m(x)dx = \delta_{lm} \frac{2}{2l+1}\]
+
+\paragraph{Associated Legendre Functions}
+Useful in Spherical Harmonics in Quantum Mechanics. ODE given by:
+\[ (1-x^2)y'' - 2xy' + [l(l+1) - \frac{m^2}{1-x^2}]y = 0 \]
+
+Solutions given by:
+\[P^m_l(x) = (1-x^2)^{m/2}\frac{d^m}{dx^m}P_l(x)\]
+With optional $(-1)^m$ factor. In terms of Rodrigues's Formula:
+\[P^m_l(x) = \frac{1}{2^ll!}(1-x^2)^{m/2}\frac{d^{l+m}}{dx^{l+m}}(1-x^2)^l\]
+
+
+
+\section{Fourier Series}
+
+\paragraph{}
+For period between $-\pi$ and $\pi$, the series is given by:
+
+\begin{align*}
+    f(x) &= \frac{a_0}{2} + \sum_{n=1}^{\infty} a_n \cos{nx} + b_n \sin{nx}\\
+    f(x) &= \sum_{n=-\infty}^{+\infty} c_n e^{inx}
+\end{align*}
+
+With coefficients given by:
+\begin{align*}
+    a_n &= \frac{1}{\pi} \int^{\pi}_{-\pi}f(x)\cos{nx}\\
+    b_n &= \frac{1}{\pi} \int^{\pi}_{-\pi}f(x)\sin{nx}\\
+    c_n &= \frac{1}{2\pi} \int^{\pi}_{-\pi}f(x)e^{inx}\\
+\end{align*}
+
+\paragraph{}
+For period of $-l$ to $l$, the series is given by:
+
+\begin{align*}
+    f(x) &= \frac{a_0}{2} + \sum_{n=1}^{\infty} a_n \cos{\frac{n\pi x}{l}} + b_n \sin{\frac{n\pi x}{l}}\\
+    f(x) &= \sum_{n=-\infty}^{+\infty} c_n e^{\frac{in\pi x}{l}}
+\end{align*}
+
+With coefficients given by:
+\begin{align*}
+    a_n &= \frac{1}{l} \int^{l}_{-l}f(x)\cos{\frac{n\pi x}{l}}\\
+    b_n &= \frac{1}{l} \int^{l}_{-l}f(x)\sin{\frac{n\pi x}{l}}\\
+    c_n &= \frac{1}{2l} \int^{l}_{-l}f(x)e^{\frac{in\pi x}{l}}\\
+\end{align*}
+
+\subsubsection{Parseval's Theorem}
+
+\paragraph{} Otherwise known as the completeness relation (Boas). Related to cross/inner product in linear algebra. 
+
+\begin{align*}
+\text{Average of} \; [f(x)]^2 &= (\frac12 a_0)^2 + \sum^\infty_1 \frac12 a_n^2 + \frac12 b_n^2 \\
+\text{Average of} \; [f(x)]^2 &= \sum^\infty_{-\infty} |c_n|^2
+\end{align*}
+Good way to remember it is with using Pythagoras Theorem to integrate sine squared and cosine squared. Useful in evaluating infinite sums where each term represents the coefficients of a Fourier Series and the function representing it can be used to give the result.
+
+\section{Integral Transform}
+
+\subsection{Fourier Transform}
+
+The more powerful generalisation of Fourier Series, for non periodic function with limits at infinity over a continuous domain. Applications include shifting from time to frequency domain in electronic signals or different spaces for the wavefunction. The $2\pi$ reciprocal prefactor can vary between different authors. Intuitively, by representing $k_n = \frac{n\pi}{l}$ and taking $\lim_{l \to 0}$ and integrating gives a good picture.
+
+\begin{align*}
+f(x) &= \frac{1}{\sqrt{2\pi}}\int^\infty_{-\infty} F(k)e^{ikx} dk \\
+F(k) &= \frac{1}{\sqrt{2\pi}}\int^\infty_{-\infty} f(x)e^{-ikx} dx
+\end{align*}
+Similar to Fourier Series, variations with sine and cosine can be used instead of the complex exponential. However, remember to multiply by two if needed as the range is reduced by half. 
+
+
+
+
+\subsection{Laplace Transform}
+
+Please refer to tables. Useful in solving inhomogenous ODEs (function instead of 0 in RHS). In general:
+\[ L(f) = \int_0^\infty f(x) e^{-px} dx \]
+
+\subsection{Convolution}
+
+Often we might end up with a solution given as a product of two known transforms. A convolution is defined as:
+\begin{align*}
+g*h &= \int_0^t g(t-r)h(r)dt \\
+f*g &= \int_{\-\infty}{\infty}f(x-u)g(u)du
+\end{align*}
+Top refers to Laplace transform, bottom refers to Fourier Transform.
+
+The respective convolution theorem are:
+
+\begin{align*}
+    L[g*h] &= L[g]L[h]\\
+    FG &= \frac{1}{\sqrt{2\pi}}FT[f*g]\\
+    F*G &= fg
+\end{align*}
+
+\paragraph{Generalized Parseval's Theroem}
+From Convolution Theorem a more general form of the Parseval's Theorem can be derived:
+
+\[\int^\infty_{-\infty} |F(k)|^2 dk =\frac{1}{2\pi} \int^\infty_{-\infty}|f(x)|^2dx\]
+
+\subsection{Dirac Delta Function}
+
+This is a distribution which is quite useful and shows up often in Quantum Mechanics.
+
+\[ \delta(x - a) = 0 \, \text{unless} \, x=a\]
+In which case, it becomes infinity. It has the property of:
+\[\int \delta(x-a) dx = 1\]
+
+Which means:
+
+\[ \int_a f(x)\delta(x-a)dx = f(a)\]
+
+\subsection{Green's Function}
+Given a differential equation with a forcing function, solving it in terms of Green's function and the Dirac Delta function provides the solution to the DE via integrating the product of Green's function and the driving function. Example:
+
+\begin{align*}
+    y''+\omega^2 y &= f(x) \\
+    \frac{d^2}{dx^2}G(x,t) + \omega^2 G(x,t) &= \delta(t - x) 
+\end{align*}
+The solution would be:
+\[y = \int G(x,t) f(t) dt\]
+This can be shown by substituting this solution into the DE and solving to find it equal to $f(x)$. 
+
+
+
+\end{document}

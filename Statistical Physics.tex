@@ -1,0 +1,110 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[a4paper, total={6.5in, 9.5in}]{geometry}
+
+
+\title{Statistical Physics}
+\author{Kelvin Ho}
+\date{April 2021}
+
+\begin{document}
+
+\maketitle
+
+
+\section{Introduction}
+Summary of Statistical Physics. This is \textbf{not} a course on classical thermodynamics, nor is it strictly a course on statistical thermodynamics.
+
+\section{Classical Laws}
+
+\subsection{Classifications}
+
+\paragraph{Quasi-static systems} are where heat transfer is slow and that thermal equilibrium is maintained with the environment.
+
+\paragraph{Reversible systems}
+$dS = 0$ only applies to spontaneous reversible systems.
+
+
+
+\subsection{Variables}
+\paragraph{Intensive Variables}
+Variables which do not scale with the size of the system. Example: Pressure, Temperature, Chemical Potential.
+
+\paragraph{Extensive Variables}
+Variables which scale with the size of the system. Example: Entropy, Energy, Volume.
+
+\subsection{Ideal Gas}
+
+The \textbf{Ideal Gas Law} is given by:
+\[\boxed{pV = Nk_B T}\]
+Where $p$ is pressure, $V$ is volume, $N$ is number of particles, $k_B$ is Boltzmann's Constant, $T$ is temperature.
+
+Thus the total kinetic energy is:
+
+\[ E = \frac12 N m \langle v^2 \rangle\]
+
+The pressure can be shown to be:
+\[ pV =\frac13 Nm\langle v^2\rangle\]
+Which, when combined:
+\[E = \frac32pV\]
+Shows that the energy of an Ideal Gas is:
+
+\[ E = \frac32 Nk_B T\]
+
+\subsection{Entropy}
+Entropy is simply defined as:
+
+\[ dS = \left(\frac{dQ}{T}\right)_q  \]
+Where the underscript $q$ denotes quasi-static system. Rewrite this as:
+\[\left(\frac{dQ}{T}\right)_q = \frac{dE + pdV}{T}\]
+Performing (reverse) product rule differentiation and make the relevant substitution before integrating:
+\[ S(T,V, N) = N k_B\ln{\left(\frac{(k_B T)^\frac32}{\hat{c}N/V}\right)}\]
+In which a term related to the number of particles, which does not change in an isolated system, is added. This creates an extensive state variable which is dependent on $T,V,N$.  
+
+
+
+\subsection{Four Laws}
+
+\begin{enumerate}
+    \item \textbf{Zeroth Law:} If $T_A = T_B$ and $T_B = T_C$, then $T_A =T_C$. Alternatively, heat flow from hotter to cooler systems to achieve equilibrium.
+    \item \textbf{First Law:} The energy change of a system is the heat flowing into the system and work done \textbf{on} the system: \[dE = dQ + dW\]
+    \item \textbf{Second Law:} Entropy in a system can only be constant (in reversible systems) or increase. \[dS \leq 0\]
+    \item \textbf{Third Law:} As temperature goes to absolute zero, entropy approaches a constant (usually zero). In popular saying, you can never reach absolute zero. \[T \to 0^+ \quad S\to S_0\]
+\end{enumerate}
+
+
+\section{Maximising Entropy}
+
+In classical mechanics, systems tend to states which minimises potential energy. In thermodynamics, systems tend to (equilibrium) states which maximises entropy.
+
+\subsection{Fundamental Relation of Thermodynamics}
+
+Using $dW = -pdV$ and $dQ = TdS$, one can write:
+
+\[\boxed{dE = TdS - pdV + \mu dN}\]
+
+This can be expressed as:
+
+\[
+dE = \underset{=T}{\left(\frac{\partial E}{\partial S}\right)}dS
+
+\]
+\subsection{Legendre Transformation}
+
+
+
+
+\subsection{Entropy Minimisation}
+The system lives in an environment in which heat can be exchanged. However, the environment's temperature remains constant. If $dQ$ flows into the system, then the environment experiences $-dQ$, so the entropy change of the environment is:
+\[ dS_\text{env} = \frac{-dQ}{T_\text{env}}\]
+
+The total entropy is:
+\begin{align*}
+    dS_\text{total} &= dS_\text{env} + dS\\
+    &= \frac{-dQ}{T_\text{env}}+0\\
+\end{align*}
+
+
+\end{document}
