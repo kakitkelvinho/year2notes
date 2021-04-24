@@ -15,7 +15,7 @@
 
 
 \section{Introduction}
-Summary of Statistical Physics. This is \textbf{not} a course on classical thermodynamics, nor is it strictly a course on statistical thermodynamics.
+Summary of Statistical Physics. This is \textbf{not} a course on classical thermodynamics, nor is it strictly a course on statistical thermodynamics. Delivered (online) by Prof. Bart Hoogenboom of UCL in the year 2021.
 
 \section{Classical Laws}
 
@@ -88,13 +88,38 @@ Using $dW = -pdV$ and $dQ = TdS$, one can write:
 This can be expressed as:
 
 \[
-dE = \underset{=T}{\left(\frac{\partial E}{\partial S}\right)}dS
-
+dE = \underset{=T}{\left(\frac{\partial E}{\partial S}\right)}dS - \underset{=-p}{\left(\frac{\partial E}{\partial V}\right)}dV + \underset{=\mu}{\left(\frac{\partial E}{\partial N}\right)} dN
 \]
+
+
 \subsection{Legendre Transformation}
 
+The Legendre Transformation of a function is given by the function and the conjugate ($a$) of the variable:
 
+\[ f = g - \frac{\partial g}{\partial A}A = g - aA\]
 
+In which the partial derivative will then be substituted with the relevant variable. 
+
+\[df = dg - Ada - adA\]
+
+\subsection{Thermodynamic Potentials}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|c|}
+    \hline
+         Name &  Definition & Fixed\\
+    \hline
+         Energy & $E$         & $S,V,N$\\
+         Helmoltz Free Energy & $F = E-TS$& T,V,N\\
+         Enthalpy & $H = E + pV$ & $S, p, N$\\
+         Gibbs Free Energy & $G = H - TS$ & $T, p, N$\\
+         Grand Potential & $\Phi=F -\mu N$ & $T,V, \mu$\\
+         \hline
+    \end{tabular}
+    \caption{Thermodynamic Potentials}
+    \label{tab:thermopotential}
+\end{table}
 
 \subsection{Entropy Minimisation}
 The system lives in an environment in which heat can be exchanged. However, the environment's temperature remains constant. If $dQ$ flows into the system, then the environment experiences $-dQ$, so the entropy change of the environment is:
@@ -106,5 +131,149 @@ The total entropy is:
     &= \frac{-dQ}{T_\text{env}}+0\\
 \end{align*}
 
+To find that different potentials maximise entropy, use the appropiate assumptions (for example, $dW = 0$, or $dT = 0$, find unchanging variables) to construct the above. Then use that to show that, when the potential is minimised, entropy is maximised.
+
+
+\section{Probabilities in Statistical Mechanics}
+
+\subsection{Tenets}
+
+\paragraph{Microstate}
+
+Complete description of system, each dynamical variable is exactly defined (The points on each die if one rolls 2 dice).
+
+\paragraph{Macrostate}
+Collection of microstates with common property (outcomes of rolling 2 die with same total points).
+
+\paragraph{Principle of Equal A Priori Probabilities}
+An isolated system in equilibrium occupies each accessible microstate with equal probability.
+ 
+ 
+\paragraph{Microstate multiplicity}
+A macrostate can be denoted by $\Omega$, which represents the microstate multiplicity of that macrostate. 
+
+Ordinarily, the probability of a macrostate happening would be proportional to the microstate multiplicity of the macrostate:
+
+\[P(\text{macrostate}) \propto \Omega(\text{macrostate})\]
+However that is not always the case as will be seen later.
+
+\subsection{Boltzmann's Entropy}
+
+Boltzmann defined entropy to be:
+
+\[ \boxed{S = k_B \ln{\Omega}}\]
+
+
+
+Where $\Omega$ denotes the number (multiplicity)\footnote{Physicists and their fancy words.} of microstates. Doubling the volume squares the number of microstates (think 1 die $\implies$ 6 outcomes, but 2 dice $\implies$ $6^2=36$ outcomes), so taking the log retains the linear nature of the extensive variable.
+
+
+\subsection{Canonical Distribution}
+
+A system is in contact with a resevoir, in which it can exchange energy with:
+\[ E_\text{total} = E + E_r\]
+
+Thus, the probability is proportional to:
+\[ P(E) \propto \Omega(E_\text{tot} - E)\]
+
+
+Taking the logarithm and taylor expanding around $E$ before substituting back into above would give the probability for a system to occupy (the macrostate with) energy $E$. With $\beta$ as the inverse temperature:
+\[\beta = \frac{1}{k_B T}\]
+
+The probability is:
+
+\[\boxed{P(E) = \frac{\Omega(E)e^{-\beta E}}{Z}}\]
+
+Where $Z$ is the canonical partition function:
+\[\boxed{Z = \sum_E\Omega(E)e^{-\beta E}}\]
+
+By rewriting the macrostate in terms of entropy, this can be rewritten in terms of Helmoltz Free Energy $F$.
+
+\subsection{Grand Canonical Partition Function}
+
+The system can now exchange both energy and number of particles with the reservoir. As such, the probability is determined by both energy and number of particles:
+
+\[P(E, N) \propto \Omega_r(E_\text{tot} - E, N_\text{tot} -N)\]
+
+As to before, the probability becomes:
+
+\[\boxed{P(E,N) = \frac{\Omega(E, N) e^{-\beta(E-\mu N}}{Z_G}}\]
+
+The partition function is:
+
+\[\boxed{Z_G = \sum_{E,N}\Omega(E,N)e^{-\beta(E-\mu N)}}\]
+
+By rewriting the macrostate in terms of entropy, this can be rewritten in terms of the grand canonical potential $\Phi$.
+
+
+\section{Applying Statistical Mechanics}
+
+\subsection{Microcanonical Ensemble}
+
+If there are $Q$ items to be distributed in $N$ bins, treat it as arranging $Q$ items in $N - 1$ partitions. There would be $(Q+N-1)!$ ways, but this would have to be divided by $Q!$ and $(N-1)!$ to prevent double counting. Or, this is \textbf{choosing} $N-1$ spots to place the partitions among the total number of objects. Each macrostate would be given by:
+
+\[ \Omega(Q,N) = 
+\left(
+\begin{matrix}
+Q+N-1\\
+Q
+\end{matrix}
+\right)
+=
+\frac{(Q+N-1)!}{Q!(N-1)!}
+\]
+
+\subsection{Sterling Approximation}
+
+Big factorials are inconvenient to deal with. This is a handy trick for big $m$:
+
+\[ \boxed{ m! = m\ln{m} - m}\]
+
+For example, applying this for large $Q$ and $N$ yields:
+
+\[\lim_{Q/N\to\infty}\Omega(Q,N) = e^N \left(\frac{Q}{N}\right)^{N-1}\]
+
+\subsection{Revisiting Canonical Ensemble}
+
+The canonical ensemble average is given by:
+\[\langle A \rangle = \frac{1}{Z}\sum_E A(E)\Omega(E)\exp{(-\beta E)}\]
+
+Some useful relations to remember:
+
+\[\langle E \rangle = -\frac{1}{Z}\frac{\partial Z}{\partial \beta} = \frac{\partial \ln Z}{\partial \beta}\]
+
+\subsection{Equipartition Theorem}
+
+Each degree of freedom, $\alpha_j x_j^2$ in energy, contributes to $\frac12 k_B T$ to the total average canonical energy.
+
+
+\subsection{Revisiting Grand Canonical Ensemble}
+
+Similar definitions to earlier leads to:
+
+\[\langle N \rangle = \frac{1}{Z_G}\frac{1}{\beta}\frac{\partial Z_G}{\partial \mu}\]
+
+This is useful in determining systems such as crystal vacancies.
+
+\section{More Entropy}
+
+\subsection{Probability Limit}
+Something about normal distribution. Basically if $N\to \infty$ then the distribution becomes very sharp.
+
+\subsection{Gibbs Entropy}
+
+For a system in which each microstate $j$ occurs with probability $P_j$, the entropy is given by:
+
+\[ S_G = -k_B\sum_jP_j \ln{P_j}\]
+
+\subsection{Shannon Entropy}
+
+Claude Shannon (1916-2001) asked the least number of bits required per symbol to convey a message. The answer is, for an asymptotically long message composed of symbols $j$ which occurs at probability $P_j$, it requires a minimum numbers of bits $S_I$ per symbol:
+
+\[\boxed{S_I = -\sum_j P_j \log_2 P_j= -\frac{1}{\ln 2}\sum_j P_j \ln P_j}\]
+This is the case of 2-bits encoding typical of modern day computers.
+
+\subsection{von Neumann Entropy}
+Useful in quantum computers. Not covered in this course.
 
 \end{document}
