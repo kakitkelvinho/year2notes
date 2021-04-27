@@ -186,6 +186,7 @@ The probability is:
 
 Where $Z$ is the canonical partition function:
 \[\boxed{Z = \sum_E\Omega(E)e^{-\beta E}}\]
+The partition function can be thought of a sum of statistical weights.
 
 By rewriting the macrostate in terms of entropy, this can be rewritten in terms of Helmoltz Free Energy $F$.
 
@@ -197,7 +198,7 @@ The system can now exchange both energy and number of particles with the reservo
 
 As to before, the probability becomes:
 
-\[\boxed{P(E,N) = \frac{\Omega(E, N) e^{-\beta(E-\mu N}}{Z_G}}\]
+\[\boxed{P(E,N) = \frac{\Omega(E, N) e^{-\beta(E-\mu N})}{Z_G}}\]
 
 The partition function is:
 
@@ -240,7 +241,8 @@ The canonical ensemble average is given by:
 
 Some useful relations to remember:
 
-\[\langle E \rangle = -\frac{1}{Z}\frac{\partial Z}{\partial \beta} = \frac{\partial \ln Z}{\partial \beta}\]
+\[\boxed{\langle E \rangle = -\frac{1}{Z}\frac{\partial Z}{\partial \beta} = \frac{\partial \ln Z}{\partial \beta}}\]
+
 
 \subsection{Equipartition Theorem}
 
@@ -251,7 +253,13 @@ Each degree of freedom, $\alpha_j x_j^2$ in energy, contributes to $\frac12 k_B 
 
 Similar definitions to earlier leads to:
 
-\[\langle N \rangle = \frac{1}{Z_G}\frac{1}{\beta}\frac{\partial Z_G}{\partial \mu}\]
+\[\boxed{\langle N \rangle = \frac{1}{Z_G}\frac{1}{\beta}\frac{\partial Z_G}{\partial \mu}} = \frac{1}{\beta}\frac{\partial \ln Z_G}{\partial \mu}\]
+
+Comparison with canonical result:
+
+\[-\frac{\partial \ln Z_G}{\partial \beta} = -\frac{1}{Z_G}\frac{\partial Z_G}{\partial \beta} = \frac{1}{Z_G}\sum_{E,N}\Omega(E,N)(E-\mu N)e^{-\beta(E-\mu N)} = \langle E \rangle + \mu \langle N \rangle\]
+Therefore:
+\[\boxed{\langle E \rangle + \mu \langle N \rangle = -\frac{\partial \ln Z_G}{\partial \beta}}\]
 
 This is useful in determining systems such as crystal vacancies.
 
@@ -264,16 +272,324 @@ Something about normal distribution. Basically if $N\to \infty$ then the distrib
 
 For a system in which each microstate $j$ occurs with probability $P_j$, the entropy is given by:
 
-\[ S_G = -k_B\sum_jP_j \ln{P_j}\]
+\[ \boxed{S_G = -k_B\sum_jP_j \ln{P_j}}\]
+
+Writing the canonical probability as: $P_j = Z^{-1}e^{-\beta E}$, the canonical entropy is given by:
+
+\[\boxed{S_G = -k_B\sum_jP_j\times \left(-\frac{E_j}{k_BT} - \ln Z\right) = \frac{1}{T}\langle E \rangle + k_B \ln Z}\]
+
+Writing the grand canonical probability as: $P_j = Z_G^{-1}e^{-\beta(E - \mu N)}$, the grand canonical entropy is given by:
+
+\[\boxed{S_G = -k_B\sum_j P_j \left( -\frac{E_j}{k_BT} + \frac{\mu N}{k_B T} - \ln Z_G\right) = \frac1T\langle E \rangle - \frac{\mu \langle N \rangle}{T} + k_B \ln Z_G}\]
 
 \subsection{Shannon Entropy}
 
-Claude Shannon (1916-2001) asked the least number of bits required per symbol to convey a message. The answer is, for an asymptotically long message composed of symbols $j$ which occurs at probability $P_j$, it requires a minimum numbers of bits $S_I$ per symbol:
+Claude Shannon (1916-2001) asked what is the least number of bits required per symbol to convey a message. The answer is, for an asymptotically long message composed of symbols $j$ which occurs at probability $P_j$, it requires a minimum numbers of bits $S_I$ per symbol:
 
 \[\boxed{S_I = -\sum_j P_j \log_2 P_j= -\frac{1}{\ln 2}\sum_j P_j \ln P_j}\]
 This is the case of 2-bits encoding typical of modern day computers.
 
 \subsection{von Neumann Entropy}
 Useful in quantum computers. Not covered in this course.
+
+
+\section{Quantum Gas}
+
+\subsection{TISE in a box}
+Picture a box in which there are free particles inside. They do not interact. They form the Schrodinger Equation:
+\[-\frac{-\hbar^2}{2m}\nabla^2\psi(x,y,z) = E\psi(x,y,z)\]
+They form separable solutions, and can essentially be solved as a infinite square wells, with:
+\[k_x \equiv \frac{\sqrt{2mE_x}}{\hbar}, \quad k_y \equiv \frac{\sqrt{2mE_y}}{\hbar}, \quad k_z \equiv \frac{\sqrt{2mE_z}}{\hbar}\]
+The solutions are:
+\[ \psi(x,y,z)=\sqrt{\frac{8}{l_xl_yl_z}}\sin(\frac{n_x\pi}{l_x}x)\sin(\frac{n_y\pi}{l_y}y)\sin(\frac{n_z\pi}{l_z}z)\]
+The allowed energies are:
+\[E_{x,y,z}=\frac{\hbar^2\pi^2}{2m}\left(\frac{n_x^2}{l_x^2}+\frac{n_y^2}{l_y^2}+\frac{n_z^2}{l_z^2}\right) = \frac{\hbar^2 k^2}{2m}\]
+
+In this case, $k$ is the magnitude of the wavevector $\mathbf{k} \equiv (k_x, k_y, k_z)$.
+
+Picture a coordinate system with axes $(k_x,k_y,k_z)$, and the divisions would for example be: $k_x = \frac{\pi}{l_x}, \frac{2\pi}{l_x}, \frac{3\pi}{l_x},...;$. Each point represents a possible energy state. Hence, a sphere of radius $k$ would represent states with equal energy.
+
+\subsection{Spin}
+Each particle as additionally a spin factor, which ranges from $-s$ to $s$ in integer values. As such there are $(2s+1)$ values. This is important in considering the multiplicity of the system.
+
+\subsection{One Particle Partition Function}
+
+The partition function can be written as:
+\[Z_1 = \sum_{n_x,n_y,n_z} \Omega(n_x,n_y,n_z)e^{-\beta E_{n_x,n_y,n_z}}=\sum_{k_x,k_y,k_z} (2s+1)e^{-\beta E_\mathbf{k}}\]
+
+Group the microstates in terms of the magnitude $k$ of the wavevector $\mathbf{k}$.
+
+\[ Z_1 = \int^\infty_0 \rho(k) e^{-\beta E(k)dk} = \int^\infty_0 g(E) e^{-\beta E}dE\]
+As such, $\rho(k)dk$ is the multiplicity in the range $k\to k+dk$, and $g(E)dE$ is that in range $E\to E+dE$. As such, $\rho(k)$ and $g(E)$ are their respective densities.
+
+To find the density function $\rho(k)$, consider the number of points enclosed by a thin shell of $k \to k+dk$. Assume $l_x=l_y=l_z=l$, and $V\equiv l^3$, so each point `owns' a volume of $\Delta k^3 =\left(\frac{\pi}{l}\right)^3$. The shell is the surface area of the sphere multiplied by $dk$. Notice that the points are only on the first out of the eight quadrant, and the number of points also have to be multiplied by the multiplicity due to its spin. Thus:
+
+\[\rho(k)dk = (2s+1)\frac18\frac{4\pi k^2 dk}{\pi^3/l^3}\]
+Hence:
+\[\boxed{\rho(k) = \frac{(2s+1)Vk^2}{2\pi^2}}\]
+
+The multiplicity of energy across range $dE$ should be the same as that across $dk$. Subsequently:
+
+\[g(E)dE =\rho(k)dk  \implies g(E) = \rho(k)\frac{dk}{dE}\]
+As $k = \frac{\sqrt{2mE}}{\hbar}$:
+\[ \frac{dk}{dE} = \frac{1}{2\hbar} \sqrt{\frac{2m}{E}}\]
+\[g(E) = \frac{(2s+1)Vk^2}{2\pi^2}\frac{1}{2\hbar} \sqrt{\frac{2m}{E}} = \frac{(2s+1)V}{2\pi^2}\frac{1}{2\hbar} \sqrt{\frac{2m}{E}}\frac{2mE}{\hbar^2} \]
+\[\boxed{g(E) = \frac{(2s+1)V}{(2\pi)^2}\left(\frac{2m}{\hbar^2}\right)^{3/2}\sqrt{E}}\]
+Thus, the partition function would be:
+\[Z_1 = \frac{(2s+1)V}{(2\pi)^2}\left(\frac{2m}{\hbar^2}\right)^{3/2}\int^\infty_0 \sqrt{E} e^{-\beta E} dE\]
+Using a substitution $x = \sqrt{E}$ and standard integral related to variance of Gaussian distribution:
+\[\int^\infty_0 \sqrt{E} e^{-\beta E} dE = \frac12 \sqrt{\frac{\pi}{\beta^3}}\]
+Thus:
+\[Z_1 = \frac{(2s+1)V}{(2\pi)^2}\left(\frac{2m}{\hbar^2}\right)^{3/2}\frac12 \sqrt{\frac{\pi}{\beta^3}} = (2s+1)V\left(\frac{2\pi m}{(2\pi\hbar)^2\beta^2}\right)^{3/2}\]
+Defining the thermal \textbf{de Brogile wavelength} as:
+\[\boxed{\lambda_\text{th} = \sqrt{\frac{\beta h^2}{2\pi m}}=\frac{h}{\sqrt{2\pi m k_B T}}}\]
+The partition function becomes:
+\[\boxed{Z_1 = (2s+1)\frac{V}{\lambda_\text{th}}}\]
+
+\subsection{Bosons and Fermions}
+
+Suppose there is a two particle system that is described by:
+\[\psi(\mathbf{r}_1, \mathbf{r}_2) = \psi_a(\mathbf{r}_1)\psi_b(\mathbf{r}_2)\]
+However, if you cannot distinguish between the two, a wavefunction must not be dependent on which particle it is referring to:
+\[\psi_\pm(\mathbf{r}_1, \mathbf{r}_2) = A[\psi_a(\mathbf{r}_1)\psi_b(\mathbf{r}_2)\pm\psi_b(\mathbf{r}_1)\psi_a(\mathbf{r}_2)]\]
+
+It is defined that:
+\begin{enumerate}
+    \item \textbf{Bosons} have \textit{integer} spins
+    \item \textbf{Fermions} have \textit{half integer} spins
+\end{enumerate}
+
+In the above, Bosons are $+$, Fermions are $-$.
+
+\paragraph{Pauli's Exclusion Principle}
+Two identical Fermions cannot occupy the same state. This is because:
+\[\psi_-(\mathbf{r}_1, \mathbf{r}_2) = A[\psi_a(\mathbf{r}_1)\psi_b(\mathbf{r}_2)-\psi_b(\mathbf{r}_1)\psi_a(\mathbf{r}_2)]\]
+Would equal zero if $\psi_a = \psi_b$.
+
+\subsection{Partition Functions for Indistinguishable Particles}
+
+Each state can be represented by its energy. At each energy, a partition function can be created. Each `partition' is defined by number of particles, so microstate multiplicity is 1. Each `partition' has energy $NE$. Thus:
+
+\[Z^{(E)}_G = \sum_{N=0}^{N_\text{max}} e^{-\beta(E-\mu)N}\]
+
+
+\subsubsection{Bosons}
+For Bosons, $N_\text{max} = \infty$. Each state can be filled by as many identical Bosons as desired. As such, the partition function becomes an infinite geometric series:
+\[\boxed{Z_G^{(E)} = \frac{1}{1-e^{-\beta(E-\mu)}}}\]
+The average number of particles are given by $\langle N \rangle = \frac{1}{\beta}\frac{\partial \ln Z_G^{(E)}}{\delta \mu}$:
+\[\boxed{\langle N \rangle = \frac{1}{e^{-\beta(E-\mu)N}-1}}\]
+
+\subsection{Fermions}
+For Fermions, no more than 1 Fermion can occupy the state. Thus, $N_\text{max} = 1$, and the partition function is:
+\[\boxed{Z^{(E)}_G = 1 + e^{-\beta(E-\mu)}}\]
+The average number of particles are:
+\[\langle N \rangle = \frac{1}{e^{-\beta(E-\mu)N}+1}\]
+
+For simplicity, both can be written as \((e^{\beta(E-\mu)N}\mp1)^{-1}\).
+
+\subsection{Quantum Gas with more than one particle}
+
+Now consider a system with $N_j$ particles at energy $E_j$. Thus, they each have their own partition functions $Z^{(E_j)}_G$. Similar to rolling dice, the grand canonical partition function for multiple particles which are \textbf{independent} would be:
+
+\[Z_G = \prod_{\mathbf{k_j}}Z_G^{E_\mathbf{k_j}}\]
+
+This can also be represented by:
+\[Z_G = \left(\sum_{\mathbf{k}_1}e^{-\beta(E-\mu)N_{\mathbf{k}_1}})^{\Omega(E_{\mathbf{k}_1})}\right)\times\left(\sum_{\mathbf{k}_2}e^{-\beta(E-\mu)N_{\mathbf{k}_2}})^{\Omega{(E_{\mathbf{k}_2})}}\right)\times...\]
+Where $\Omega$ represents the multiplicity of each energy. Ordinarily, this is 1, if each energy only pops up once. But in cases of degeneracy this would not be 1. This allows the product to be multiplied over energy instead of the wavevector:
+\begin{align*}
+    Z_G = \prod_E\left(Z_G^{(E)}\right)^{\Omega(E)}
+\end{align*}
+Taking the logarithm:
+\begin{align*}
+    \ln Z_G &= \sum_E \Omega(E) \ln Z_G^{(E)}\\
+    &\approx \int^\infty_0 g(E) \ln Z_G^{(E)} dE\\
+\end{align*}
+As the discretisation of energy levels becomes negligible, the equation becomes exact. Thus:
+\[\boxed{\ln Z_G = \int^\infty_0 g(E) \ln Z_G^{(E)} dE}\]
+\begin{align*}
+    \ln Z_G &= \frac{(2s+1)V}{(2\pi)^2}\left(\frac{2m}{\hbar^2}\right)^{3/2}\int^\infty_0 \sqrt{E} \ln Z_G^{(E)} dE\\
+    &=\mp\frac{(2s+1)V}{(2\pi)^2}\left(\frac{2m}{\hbar^2}\right)^{3/2}\int^\infty_0 \sqrt{E} \ln (1\mp e^{-\beta(E-\mu)}) dE
+\end{align*}
+
+\subsection{Statistical Parameters}
+What is the entropy? From Gibbs Entropy:
+\[S_G = \frac1T\langle E \rangle - \frac{\mu \langle N \rangle}{T} + k_B \ln Z_G \]
+Notice that:
+\begin{align*}
+    \langle E \rangle + \mu \langle N \rangle &= -\frac{\partial \ln Z_G}{\partial \beta} \\
+    &= \int^\infty_0 g(E) \left(-\frac{\partial \ln Z_G^{(E)}}{\partial \beta}\right) dE\\
+    &= \int^\infty_0 g(E) \left(\langle E \underset{=E\langle N \rangle ^{(E)}}{\rangle ^{(E)}} - \mu \langle N \rangle ^{(E)} \right) dE\\
+    &= \int^\infty_0 g(E) (E-\mu) \langle N \rangle ^{(E)}  dE
+\end{align*}
+
+For completeness:
+\begin{align*}
+    \langle N \rangle &= \frac{1}{\beta}\frac{\partial \ln Z_G}{\partial \mu} \\
+    &= \int^\infty_0 g(E) \langle N \rangle ^{(E)} dE\\
+    &= \frac{(2s+1)V}{(2\pi)^2}\left(\frac{2m}{\hbar^2}\right)^{3/2}\int^\infty_0 \frac{\sqrt{E}}{e^{\beta(E-\mu)N}\mp1}dE\\
+    \langle E \rangle &= \int^\infty_0g(E)E\langle N \rangle ^{(E)} dE\\
+    &= \frac{(2s+1)V}{(2\pi)^2}\left(\frac{2m}{\hbar^2}\right)^{3/2}\int^\infty_0 \frac{E^{3/2}}{{e^{\beta(E-\mu)N}\mp1}}dE
+\end{align*}
+Thus, the entropy is:
+\begin{align*}
+    TS_G &= \langle E \rangle - \mu \langle N \rangle + \beta^{-1} \ln Z_G\\
+    &= \int^\infty_0 \int^\infty_0 g(E) (E-\mu) \langle N \rangle ^{(E)}  dE + \beta^{-1}\int^\infty_0 g(E) \ln Z_G^{(E)} dE\\
+    &= \int^\infty_0 g(E)\left(\frac{E-\mu}{e^{\beta(E-\mu)N}\mp1} \mp \beta^{-1} \ln (1\mp e^{\beta(E-\mu)N})\right)dE
+\end{align*}
+
+The pressure of the gas can be calculated using the Grand Potential: $\beta \Phi = -\ln Z_G$:
+\[p = -\left(\frac{\partial \Phi}{\partial V}\right)= \frac1\beta\left(\frac{\partial \ln Z_G}{\partial V}\right)=\mp\frac1\beta\frac{(2s+1)}{(2\pi)^2}\left(\frac{2m}{\hbar^2}\right)^{3/2}\int^\infty_0\sqrt{E}\ln(1\mp e^{\beta(E-\mu)N})dE\]
+Integrating by parts yield:
+\[p = \frac23 \frac{\langle E \rangle}{V}\]
+While this is similar to the classical equation, this does not hold for $T\to 0$ as $\langle E \rangle$ does not follow classical behaviour in this region.
+
+\subsection{Classical Limit}
+
+While we expect $Z_N = Z_1^N$, which is, a system with many particles is simply a product of one particle partition functions. This is not true.
+
+For $\langle N \rangle ^{(E)} \ll 1$, effects due to quantum mechanics become negligible (fermions and bosons are identicle). Taylor expanding the grand canonical partition function also shows that there is no difference between the two. By writing:
+\[ \ln Z_G = e^{\beta \mu} Z_1 \implies Z_G = \exp{(e^{\beta\mu Z_1)}} = \sum_{N=0}^\infty e^{\beta\mu N}\frac{Z_1^N}{N!}\]
+Whereas by definition:
+\[ Z_G = \sum_{E,N}\Omega(E,N)e^{-\beta(E-\mu N)} = \sum_Ne^{\beta \mu N}\sum_E\Omega(E,N)e^{-\beta E} =  \sum_Ne^{\beta \mu N}Z_N\]
+Where $Z_N$ is the canonical partition function at energy $E$.
+
+Equating the two:
+\[ Z_N = \frac{Z_1^N}{N!}\]
+
+\subsection{Sackur-Tetrode Equation}
+
+The entropy $S$ of a classical, monoatomic ideal gas of $N$ indistinguishable particles of mass $m$ and spin $s$, is given by:
+
+\[\boxed{ 
+S = Nk_B\ln\left(\frac{(2s+1)e^{5/2}V}{\lambda^3_\text{th}N}
+\right) =
+Nk_B\ln\left(\frac{(2s+1)e^{5/2}(2\pi m k_B T)^{3/2}}{(N/V)\hbar^3}
+\right)
+}\]
+
+\subsection{Condition for Quantum Behaviour}
+
+A monoatomic gas of quantum particles of mass $m$ is expected to display quantum effects when:
+
+\[\boxed{n \lessapprox \lambda_\text{th}^3}\]
+
+
+\section{Boson Gases}
+
+\subsection{Ultraviolet Catastrophe}
+
+Here, canonical formalism is applied in the study of light in a box. Instead of solving for Schrodinger's Equation, solve for Maxwell's wave equation in a box. The solutions are plane waves with nodes (and not energies) at the boundaries of the box, with angular frequency:
+
+\[\omega = \frac{2\pi c}{\lambda} = kc\]
+
+Continue the same methodology. Instead of spins, the waves have 2 degrees of freedom because of the two planes of polarisation:
+
+\[\rho(k) = 2\times \frac{Vk^2}{2\pi} \implies g(\omega) = \rho(k) 
+\underset{=c^{-1}}{\frac{dk}{d\omega}}= \frac{V}{\pi^2c^3}\omega^2\]
+
+Classical statistical mechanics predicts that energy density of black-body radiation would be infinite. However, by assuming light is discretised in energy quanta $\hbar \omega j$ and follows the behavior of a quantum oscillator (the $\frac12\hbar\omega$ energy offset is irrelevant and discarded) and treating it as a boson of spin 1.
+
+\[\boxed{\ln Z = \int^\infty_0 g(\omega) \ln Z_G^{(\omega)} d\omega = -\frac{V}{\pi^2c^3}\int^\infty_0 \omega^2 \ln \left(1 - e^{-\beta \hbar \omega}\right) d\omega}\]
+
+With the partition function, the energy density is:
+
+\[\boxed{\frac{\langle E \rangle}{V} = -\frac{1}{V}\frac{\partial \ln Z}{\partial \beta}= \frac{\hbar}{\pi^2 c^3} \int^\infty_0 \frac{\omega^3}{e^{\beta\hbar\omega} - 1} d\omega}\]
+The energy spectrum is defined from the above as:
+\[\boxed{u(\omega) = \frac{\hbar}{\pi^2 c^3}  \frac{\omega^3}{e^{\beta\hbar\omega} - 1}}\]
+
+Differentiating the energy spectrum with respect to the angular frequency leads to the maximum. This is known as \textbf{Wien's Law}:
+
+\[\boxed{\omega_\text{max}\approx 2.8281\frac{k_BT}{\hbar}}\]
+
+\subsection{Black-body Radiation}
+
+Multiply and divide the energy density by $(\beta \hbar )^4$. This would give:
+
+\begin{align*}
+    \frac{\langle E\rangle}{V} = \frac{\hbar}{\pi^2 c^3}\frac{1}{\beta^4\hbar^4} \int^\infty_0 \frac{(\beta\hbar\omega)^3}{e^{\beta\hbar\omega} - 1} d\beta\hbar\omega
+\end{align*}
+
+Using a standard integral: $\int^\infty_0 x^4(e^x-1)^{-1}dx=\pi^4/15$, the result would be:
+\[\boxed{ \frac{\langle E\rangle}{V}  = \frac{(k_B T)^4}{\pi^2 c^3\hbar^3}\frac{\pi^4}{15}=\frac{4}{c}\sigma T^4}\]
+Where the \textbf{Stefan-Boltzmann constant} is defined by:
+\[\boxed{\sigma = \frac{\pi^2k_B^4}{60c^2\hbar^3} \approx 6.57 \times 10^{-8} Wm^{-2}K^{-4}}\]
+
+\subsection{Flux}
+Flux is the `stuff' passing through a unit area. Let $n(\omega)d\omega$ be the number of particles carrying energy between energy $\hbar \omega$ and $\hbar\omega + \hbar d\omega$. Assuming that (on average) the distribution of velocities is isotropic. In spherical coordinates, there are\footnote{patch on sphere's surface in terms of infinitesimal divided by total surface area}: $(4\pi)^{-1}n(\omega)d\omega\sin(\theta)d\theta d\phi$ per unit volume. The amount which reach the surface is integrating over half a sphere and scaling by the normal component of the speed of light: $c\cos\theta$, so over $\theta \in [0,\pi/2]$ and $\phi \in [-\pi, \pi]$ (same if over $[0,2\pi]$):
+
+\[\frac{c}{4\pi}n(\omega)d\omega\int^{+\pi}_{-\pi}d\phi\int^{\pi/2}_0\sin\theta\cos\theta d\theta = \frac{c}{4}n(\omega)d\omega\]
+
+The flux is that multiplied by energy per particle:
+
+\[\Phi = \frac{c}{4}\int^\infty_0 \hbar \omega n(\omega) d\omega = \frac{c}{4}\frac{\langle E \rangle}{N}=\sigma T^4\]
+
+This is known as \textbf{Stefan-Boltzmann Law}:
+
+\[\boxed{\Phi = \sigma T^4}\]
+
+\subsection{Phonons}
+
+It can be shown, through writing out coupled differential equations, that \textit{phonons} are particle-like excitations that represent lattice vibrations in a solid. Thus, a similar approach can be undertaken in determining its statistical characteristics. Here, there are two transverse modes and one longitidinal mode:
+
+\[g(\omega) = \frac{V\omega^2}{2\pi^2}\left(\frac{2}{v_T^3}+\frac{1}{v_L^3}\right) = \frac{3V\omega^2}{2\pi^2v^3_s}\]
+Where $3v_s^{-3} = (2v_T^3 +v_L^3)$.
+
+However, there must only be $3N$ amount of phonons, as they represent the oscillations of particles in 3 dimensions. \textbf{Debye's Frequency} is an arbitrary cut-off point to account for this:
+
+\[3N = \int^{\omega_D}_0 g(\omega)d\omega = \frac{V\omega^3_D}{2\pi^2v_s^3}\]
+
+Thus, for $n = N/V$, Debye's frequency is given by:
+\[\boxed{\omega_D = v_s(6\pi^2 n)^{1/3}}\]
+
+\subsection{Bose-Einstein Condensation}
+Below a certain critical temperature, the ratio of particles occupying the single particle ground state and other states become constant. As the particles occupy the same delocalised quantum wavefunction, the gas loses friction (viscosity), and this gives rise to properties such as \textbf{superfluidity} and \textbf{superconductivity}.
+
+\section{Fermion Gases}
+
+\subsection{Fermi Energy}
+
+A distribution can be created:
+
+\[\boxed{f(E) = \langle N \rangle ^{(E)} = \frac{1}{e^{\beta(E-\mu)} + 1} = \left.
+\begin{cases}
+1, \quad \text{for } E < \mu\\
+0, \quad \text{for } E > \mu
+\end{cases}
+\right.
+\text{for } \beta \to \infty
+}\]
+
+From this, the \textbf{degenerate Fermi Gas} is defined to be such a step function, where lower than the Fermi Energy, the states are occupied with probability 1 and higher than that, the states are empty. 
+
+This occurs at zero temperature, or high density:
+\[
+\boxed{
+\langle N \rangle = \lim_{\beta\to \infty}\int^\infty_0 g(E)f(E)dE = \int^{E_f}_0g(E)dE = \frac{(2s+1)V}{(2\pi^2)}\left(\frac{2m}{\hbar^2}\right)^{3/2}\frac23E_f^{3/2}
+}\]
+
+Thus, the Fermi energy is:
+
+\[\boxed{E_f = \frac{\hbar^2}{2m}\left(\frac{6\pi^2}{2s+1}\right)^{2/3}n^{2/3}}\]
+
+The energy is:
+
+\[\boxed{
+\langle E \rangle = \int0^{E_f}g(E)EdE = \frac{2V}{(2\pi)^2}\left(\frac{2m}{\hbar^2}\right)^{3/2}\frac25E_f^{5/2}
+}\]
+
+The pressure is:
+
+\[
+\boxed{
+p = \frac23 \frac{\langle E \rangle}{V} = \frac23 \frac35nE_f = \frac{\hbar^2}{5m}(3\pi^2)^{2/3}n^{5/3}
+}
+\]
+
+\subsection{Widemann-Franz Law}
+
+It can be shown that the ratio between a metal's electrical conductivity and its thermal conductivity is proportional by a constant independent of any microscopic or thermodynamic variable.
+
+\[\boxed{\frac{\alpha}{\sigma}= LT, \qquad \text{where } L = \frac{\pi^2}{3}\frac{k_B^2}{e^2}\approx2.45\timex10^{-8}W\OmegaK^{-2}}\]
+
 
 \end{document}
