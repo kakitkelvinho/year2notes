@@ -253,7 +253,7 @@ Each degree of freedom, $\alpha_j x_j^2$ in energy, contributes to $\frac12 k_B 
 
 Similar definitions to earlier leads to:
 
-\[\boxed{\langle N \rangle = \frac{1}{Z_G}\frac{1}{\beta}\frac{\partial Z_G}{\partial \mu}} = \frac{1}{\beta}\frac{\partial \ln Z_G}{\partial \mu}\]
+\[\boxed{\langle N \rangle = \frac{1}{Z_G}\frac{1}{\beta}\frac{\partial Z_G}{\partial \mu} = \frac{1}{\beta}\frac{\partial \ln Z_G}{\partial \mu}}\]
 
 Comparison with canonical result:
 
@@ -376,7 +376,7 @@ Each state can be represented by its energy. At each energy, a partition functio
 \subsubsection{Bosons}
 For Bosons, $N_\text{max} = \infty$. Each state can be filled by as many identical Bosons as desired. As such, the partition function becomes an infinite geometric series:
 \[\boxed{Z_G^{(E)} = \frac{1}{1-e^{-\beta(E-\mu)}}}\]
-The average number of particles are given by $\langle N \rangle = \frac{1}{\beta}\frac{\partial \ln Z_G^{(E)}}{\delta \mu}$:
+The average number of particles are given by $\langle N \rangle = \frac{1}{\beta}\frac{\partial \ln Z_G^{(E)}}{\partial \mu}$:
 \[\boxed{\langle N \rangle = \frac{1}{e^{-\beta(E-\mu)N}-1}}\]
 
 \subsection{Fermions}
@@ -416,9 +416,9 @@ What is the entropy? From Gibbs Entropy:
 \[S_G = \frac1T\langle E \rangle - \frac{\mu \langle N \rangle}{T} + k_B \ln Z_G \]
 Notice that:
 \begin{align*}
-    \langle E \rangle + \mu \langle N \rangle &= -\frac{\partial \ln Z_G}{\partial \beta} \\
+    \langle E \rangle - \mu \langle N \rangle &= -\frac{\partial \ln Z_G}{\partial \beta} \qquad \text{(definition)}\\
     &= \int^\infty_0 g(E) \left(-\frac{\partial \ln Z_G^{(E)}}{\partial \beta}\right) dE\\
-    &= \int^\infty_0 g(E) \left(\langle E \underset{=E\langle N \rangle ^{(E)}}{\rangle ^{(E)}} - \mu \langle N \rangle ^{(E)} \right) dE\\
+    &= \int^\infty_0 g(E) \left( \underset{=E\langle N \rangle ^{(E)}}{\langle E\rangle ^{(E)}} - \mu \langle N \rangle ^{(E)} \right) dE\\
     &= \int^\infty_0 g(E) (E-\mu) \langle N \rangle ^{(E)}  dE
 \end{align*}
 
@@ -589,7 +589,7 @@ p = \frac23 \frac{\langle E \rangle}{V} = \frac23 \frac35nE_f = \frac{\hbar^2}{5
 
 It can be shown that the ratio between a metal's electrical conductivity and its thermal conductivity is proportional by a constant independent of any microscopic or thermodynamic variable.
 
-\[\boxed{\frac{\alpha}{\sigma}= LT, \qquad \text{where } L = \frac{\pi^2}{3}\frac{k_B^2}{e^2}\approx2.45\timex10^{-8}W\OmegaK^{-2}}\]
+\[\boxed{\frac{\alpha}{\sigma}= LT, \qquad \text{where } L = \frac{\pi^2}{3}\frac{k_B^2}{e^2}\approx2.45\times 10^{-8}W\Omega K^{-2}}\]
 
 
 \end{document}
