@@ -1,0 +1,170 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[a4paper, total={6.5in, 9.5in}]{geometry}
+
+
+
+\title{Atom and Molecular Physics}
+\author{Kelvin Ho}
+\date{April 2021}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+This is a continuation of the first Quantum Mechanics course.
+
+\section{One-electron Atoms}
+
+\subsection{Hydrogen}
+
+Solving the Schrodinger Equation for the Hydrogen Atom is to write the potential of the system as the Colomb potential between the electron and the ion core:
+
+\[V(r) = \frac{-Ze^2}{4\pi\epsilon_0r}\]
+
+Then, the energy levels are:
+
+\[ E_n = -\frac{m_eZ^2e^4}{32\pi^2\epsilon_0^2\hbar^2n^2}\]
+
+The energy emitted when an electron jumps is the change between the energies of the system:
+
+\[\Delta E_n = -\frac{m_eZ^2e^4}{32\pi^2\epsilon_0^2\hbar^2}\left(\frac{1}{n_1^2} - \frac{1}{n_2^2}\right)\]
+
+Rydberg empirically discovered that:
+
+\[\frac{1}{\lambda_{if}} = R\left(\frac{1}{n_f^2} - \frac{1}{n_i^2}\right)\]
+
+Compared with the first equation and Planck's formula $E = \frac{hc}{\lambda}$:
+
+\[ R = \frac{m_eZ^2e^4}{64\pi^2\epsilon_0^2\hbar^3c}\]
+
+
+\subsection{Finite Mass Core}
+The reduced mass is:
+
+\[\mu = \frac{1}{m_p} + \frac{1}{m_e} = \frac{m_e m_p}{m_e + m_p}\]
+
+For example, for the adjusted Rydberg constant of Hydrogen:
+
+\[ R_H = R_\infty \frac{\mu_H}{m_e}\]
+
+In general, for a one electron atom of mass $M$ and ion core charge given by $Ze$:
+
+\[R_M = R_\infty\frac{\mu_M}{m_e}Z^2\]
+
+\subsection{Wavefunction}
+The wavefunction is solved in the previous quantum module. They can be represented as:
+\[ \psi = R(r)Y^m_l(\theta,\phi)\]
+
+\subsubsection{Angular Part}
+The nature of the wavefunction indicates that the electron's angular momentum is quantised and relies on $l$ and $m$, which is the \textit{orbital angular momentum quantum number} and the \textit{magnetic/azimuthal quantum number}. They can vary in integer levels:
+\begin{align*}
+    l &= 0, 1, 2,..., n - 1\\
+    m &= -l, -l+1,...,l-1,l
+\end{align*}
+
+The $l$ values are also labelled with alphabets $s,p,d,f,g,h,...$.
+
+\paragraph{Parity}
+This is defined to be:
+\[\hat{P} f(\vec{r}) \equiv f(-\vec{r})\]
+Even parity:
+\[\hat{P} f(\vec{r}) \equiv f(-\vec{r}) =  f(\vec{r})\]
+Odd Parity:
+\[\hat{P} f(\vec{r}) \equiv f(-\vec{r}) =  -f(\vec{r})\]
+
+When applied to spherical harmonic function, this is multiplying the wavefunction with $(-1)^m$.
+
+\subsubsection{Radial Part}
+
+Solving for the radial wavefunction indicates that this only depends on $n$ and $l$.
+
+\subsubsection{Degeneracy}
+
+The energy level, shown by the Rydberg formula, is only dependent on the principle quantum number $n$. Given that there are $n-1$ $l$ for each $n$ and $2l+1$ $m$ for each $l$, there are a total of:
+
+\[\sum^{n-1}_{l=0} (2l+1) = n^2\] degenerate states.
+
+Reasons for degeneracy:$\frac1r$ Potential is only dependent on magnitude of $r$ but not on the (angular) direction. 
+
+\subsection{Spin}
+
+Arises from the relativistic treatment of electron motion. Is very similar to the analysis of angular momentum. Instead of $l$ and $m$, there are $s$ and $m_s$, representing the spin vector and the projection of the spin vector in the $z$ dimension. The full wavefunction is adjusted by introducing the spin dependence:
+
+\[\psi = R_n(r)Y^l_m(\theta, \psi) \chi^s_{m_s}\]
+
+\subsection{Transitions}
+
+When a photon is absorbed, the electron `jumps'. The selection rules are:
+
+\begin{itemize}
+    \item $\Delta n$: Any value
+    \item $\Delta l = \pm 1$: TO conserve angular momentum
+    \item $\Delta m = 0, \pm 1$
+\end{itemize}    
+    
+    
+\section{Many Electron Atom}
+
+This is more difficult to solve because the potential would hence be dependent upon the interaction between the electrons. 
+
+\subsection{Independent Particle Model}
+First ignore the electron electron repulsion. Solve for each and every electron and solve for it. Then correct for it.
+
+\subsection{Central Field Approximation}
+Add another potential term:
+\[ V_c(r_i) = \langle \frac{e^2}{4\pi\epsilon_0 r_{ij}}\rangle_{j\neq i}\]
+Which is basically the Colomb potential between different electrons. Then, solve $N$ one-electron Schrodinger equation, and the total energy is the sum of the energy from each of the solutions. 
+
+The potential is not dependent on $\frac{1}{r}$ anymore.
+
+This method is best applied to atoms or ions with a single electron occupying an outer orbital:
+\begin{itemize}
+    \item Alkali Metal Atoms in Group I
+    \item Slightly Ionised Alkaline Earth Metals in Group II (After losing one electron in the S orbital)
+    \item Rydberg atoms: These have one electron in the highly excited state (high value of n)
+\end{itemize}
+
+\paragraph{Screening}
+The inner electrons \textit{screen} the charge of the nuclues:
+
+When $r_i \to 0$:
+\[ -\frac{Ze^2}{4\pi\epsilon_0 r_i} + V_c(r_i) \implies -\frac{Ze^2}{4\pi\epsilon_0 r_i}\]
+
+When $r_i \to \infty$:
+\[ -\frac{Ze^2}{4\pi\epsilon_0 r_i} + V_c(r_i) \implies -\frac{e^2}{4\pi\epsilon_0 r_i}\]
+
+\subsection{Quantum Defects}
+
+Solving the Schrodinger Equation leads to an adjustment to the eigenenergies:
+
+\[\frac{E_{nl}}{hc} = -\frac{R_M}{(n-\Delta_{nl})^2}\]
+
+Where $\Delta_{nl}$ is the quantum defect and $(n-\Delta_{nl})$ is the effective principal quantum number. The adjustment to the Rydberg constant uses a $Z$ that is the effective combined charge of the nucleus and the core electrons. See page 43 for a table listing of some quantum defect values.
+
+\subsection{Indistinguishable particles}
+
+If two particles are indistinguishable by measurement, then:
+
+\[ |\psi(1,2)|^2 = |\psi(2,1)|^2\]
+
+Which means:
+\[ \psi(1,2) = +\psi(2,1)\]
+Which is known as symmetric w.r.t. exchange.
+
+Or:
+\[ \psi(1,2) = -\psi(2,1)\]
+Which is known as antisymmetric w.r.t. exchange.
+
+\subsection{Pauli Principle}
+
+\begin{itemize}
+    \item Fermions: Antisymmetric
+    \item Bosons: Symmetric
+\end{itemize}
+
+
+\end{document}
