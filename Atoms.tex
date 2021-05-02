@@ -3,6 +3,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage[a4paper, total={6.5in, 9.5in}]{geometry}
+\usepackage{enumerate}
 
 
 
@@ -15,7 +16,7 @@
 \maketitle
 
 \section{Introduction}
-This is a continuation of the first Quantum Mechanics course.
+This is a continuation of the first Quantum Mechanics course. Note: My personal opinion but as far as this course goes it feels more like chemistry than physics. Maybe my fundamentals are bad, which is why I feel this way, but seriously, I am really bad at Chemistry.
 
 \section{One-electron Atoms}
 
@@ -166,5 +167,258 @@ Which is known as antisymmetric w.r.t. exchange.
     \item Bosons: Symmetric
 \end{itemize}
 
+Thus, no two identical fermions can occupy the same state.
+
+\subsection{Spin Wavefunctions}
+
+An individual electron can have:
+\begin{align*}
+    s &= \frac{1}{2}\\
+    m_s &= \pm\frac12\\
+\end{align*}
+Depending on whether it is aligned with the positive or negative $z$ axis, otherwise known as spin up or spin down.
+
+As a result:
+
+\[\vec{S} = \vec{s_1} + \vec{s_2}\]
+Thus, the total spin quantum number:
+\[S = |s_1-s_2|,...,|s_1+s_2|\]
+In general, the total spin vector, total spin number and spin projection are: $\vec{S}, S, M_s$.
+
+\subsection{Triplet and Singlet States}
+
+When $S=1$, $M_S = -1,0,1$. This is known as the \textit{triplet} spin state. In general, exchanges in the triplet state are \textit{symmetric} w.r.t. to exchange. This is why the symmetric antiparallel state is chosen when $M_S = 0$.
+\begin{itemize}
+    \item $M_S = +1$: Then, $\chi^T = \upuparrows = \alpha(1)\alpha(2)$
+    \item $M_S = -1$: Then, $\chi^T = \downdownarrows = \beta(1)\beta(2)$
+    \item $M_S=0$: Then, $\chi^T = \frac{1}{\sqrt{2}}[\uparrow\downarrow + \downarrow\uparrow] = \frac{1}{\sqrt{2}}[\alpha(1)\beta(2)+\beta(1)\alpha(1)$
+\end{itemize}
+
+When $S = 0$, $M_S = 0$. This is the \textit{singlet} spin state, and the antiparallel state is \textit{antisymmetric}:$\chi^T = \frac{1}{\sqrt{2}}[\uparrow\downarrow - \downarrow\uparrow] = \frac{1}{\sqrt{2}}[\alpha(1)\beta(2)-\beta(1)\alpha(1)$
+
+This can be generalized to the He atom wavefunctions (see pg 49-50).
+
+\paragraph{Spin Multiplicity}
+
+In general, each spin state has $2S+1$ associated values of $M_S$. Thus, $S=1 \implies 2S+1 = 3$ which is triplet states.
+
+\subsection{Splitting and Exchange}
+
+The excited state can be either in singlet or triplet state. 
+\begin{itemize}
+    \item \textit{Singlet}: Antisymmetric spin, so symmetric spatial. There is nonzero probability for $r_1=r_2$.
+    \item \textit{Triplet}: Vice versa. Thus, as the wavefunction cannot be zero, $r_1\neq r_2$.
+\end{itemize}
+
+If the electrons can be closed to each other, they can screen the $Z=+2$ charge of the nucleus, resulting in a weakly bound state, which is higher in energy. Vice versa, being strongly bound results in a lower energy (something like potential energy?), so there is a splitting.
+
+\subsection{Formal Analysis}
+From here on to page 56 there is a formal analysis with integrals and what not. Seems to be too hard to accessed.
+
+\subsection{Electronic configurations}
+
+Basically chemistry stuff:
+
+\begin{itemize}
+    \item $n$ refers to the shell
+    \item $l$ refers to the orbitals
+    \item $n=l$ means same subshell
+    \item Each shell can hold $2n^2$ electrons.
+    \item Electron in open shells (not full) are optically active
+\end{itemize}
+    
+\subsection{Term Symbols}
+Before I continue, note that this is quite rushed and the course itself is not very rigorous nor detailed so I am going to play it fast and loose with the notations.
+
+The many electron Hamiltonian commutes with $\hat{L}^2$ and $\hat{S}^2$. Thus, Physicists decided it would be wise to have a notation with these values. Big $L$ and $S$ are the total of their smaller alphabets components:
+
+\begin{align*}
+    \vec{L} &= \vec{l_1}+\vec{l_2}\\
+    L &= |l_1 - l_2|,...,|l_1+l_2| \qquad \text{in steps of 1}\\
+    \vec{S} &= \vec{s_1}+\vec{s_2}\\
+    L &= |s_1 - s_2|,...,|s_1+s_2| \qquad \text{in steps of 1}\\
+\end{align*}
+
+
+\paragraph{Parity revisited}
+For equivalent electrons (living in the same orbital), the parity of the spherical harmonic function reveals the symmetry of the spatial wavefunction. Luckily this is just given by $(-1)^L$, with $+1$ being symmetric and $-1$ being antisymmetric. This then determines whether the spin states can be symmetric or antisymmetric, and which $S$ are allowed. 
+
+The term symbol is then:
+\[ ^{2S+1}L_J\]
+
+Note: AFAIK just consider the unfilled orbitals. 
+
+\subsection{Hund's Rule}
+\begin{enumerate}
+    \item Largest value of $S$ is lowest in energy: Aligned spins mean they are farthest apart from each other.
+    \item Following 1, largest $L$ is lowest in energy: Electrons with same angular momentum or orbiting in the same direction, and hence encounter each other the least and therefore further apart on average.
+\end{enumerate}
+
+
+\subsection{Spin Orbit Interaction}
+Because of relativistic \textit{spin-orbit} interactions (whatever that means), the hamiltonian is altered to be:
+\[ \hat{H} = \hat{H} + \hat{H}_{SO}\]
+This extra term:
+\[ \hat{H}_{SO} \propto L \cdot S \]
+
+There are two types of magnetic dipole moment associated with an electron:
+\begin{itemize}
+    \item One related to the orbital motion of the electron
+    \item One related to the spin of the electron
+\end{itemize}
+Hence, spin-orbit interaction. These give rise to \textit{fine structure}.
+
+\subsubsection{Orbital magnetic moment}
+This is given by:
+\[ \vec{\mu}_l = -\frac{e}{2m_e}\vec{l} = \gamma_e \vec{l}\]
+For example:
+\[\mu_{(l_z)} = \gamma_e l_z = -\frac{e}{2m_e}m_l\hbar = -\mu_bm_l\]
+
+Where the Bohr Magnetron is given by: \(\mu_B = \frac{e\hbar}{2m_e}\)
+
+\subsubsection{Spin magnetic moment}
+A classical approximation is given by:
+\[ \vec{\mu}_s = -\frac{e}{2m_e}\vec{s}\]
+The Dirac equation appends a factor of $2$ to that, but then experiments on an electron gives a factor of:
+\[g_e = 2.002319304\]
+Appending this factor gives:
+\[ \vec{\mu}_{(s_z)} = -g_e \mu_B m_s \]
+And for an electron, $m_s =\mp \frac12$.
+
+\subsubsection{Interaction}
+Moving in an E field is like moving in a B field, except:
+\[ \vec{B} = \frac{\vec{E}\times \vec{v}}{c^2}\]
+Let the electric field be the gradient of an isotropic electric potential $\psi(r)$:
+\[ \vec{E} = -\frac{\vec{r}}{r}\frac{d\psi}{dr}\]
+Then doing some substitutions into the first equation above, and noting momentum being a cross product of position and momentum, then using the interaction energy of the magnetic dipole:
+\[ V = -\vec{\mu} \cdot \vec{B}\]
+
+This gives:
+\[H_{SO} = -\vec{\mu_s}\cdot\vec{B} = -\frac{e}{m^2_ec^2 r}\frac{d\phi}{dr}{\vec{l}\cdot \vec{s}}\]
+
+Which is twice the result from the relativistic Dirac equation. For a one-electron atom:
+
+\[\phi = -\frac{Ze}{4\pi\epsilon_0 r}\]
+
+Which means:
+\[H_{SO} \propto \frac{Z}{r^3}\]
+
+I have no idea what is going on here, but:
+
+\[ \langle \frac{1}{r^3} \rangle = \langle \Psi_{nlm} | \frac1{r^3} |\Psi_{nlm}\rangle = \frac{Z^3}{n^3a^3_Ml(l+\frac12)(l+1)}\]
+So
+\[H_{SO} \propto \frac{Z^4}{n^3}\]
+
+\subsection{Spin Orbit Operator}
+The spin orbit hamiltonian derived before does not have a fixed projection on the z axis. However, $J=L+S$ does. This gives:
+
+\[H_{SO} = hc A(L,S) \vec{L} \cdot {S}\]
+Where:
+\[A(L,S) = -\frac{1}{hc}\frac{e}{m^2_ec^2 r}\frac{d\phi}{dr}\]
+
+As $J^2 = (L+S)^2 = L^2+S^2+2L\cdot J$, $\vec{L}\cdot\vec{S}$ can be rewritten as:
+\[ \vec{L}\cdot\vec{S} = \frac12 [\vec{J}^2 - \vec{L}^2 - \vec{S}^2]\]
+
+By first order pertubation theory (see QM notes), the (first order) energy shift is:
+
+\[\frac{\Delta E_{SO}}{hc} = \frac{A(L,S)}{2}[J(J+1) - L(L+!) - S(S+1)]\]
+
+Which the Term symbol now makes sense:
+\[ ^{2S+1}L_J\]
+
+The \textit{Lande Interval Rule} is known as:
+
+\[\Delta E_{SO}(J) - \DeltaE_{SO}(J-1) = hc A(L,S) J\]
+
+\subsection{Coupling Schemes}
+\subsubsection{$LS$ coupling (Russell-Sanders)}
+
+For atoms with low nuclear charge (low Z), spin orbit interaction is weaker than the electron-electron interactions.
+
+The most appropriate way to describe the system is to consider $\vec{S}, \vec{L}, \vec{J} = \vec{L}+\vec{S}$.  
+
+Hund's Third Rule:
+\begin{enumerate}[(a)]
+    \item Normal Case - Less than half full: Level energies increase with increasing $J$. $\therefore$ Smallest $J$, lowest energy.
+    \item Inverted Case - More than half full: Level energies decrease with increasing $J$.
+    \item If the outer shell is half full, there is no multiplet energy splitting.
+\end{enumerate}
+
+
+\subsubsection{$jj$-coupling}
+
+In high Z atoms, the coupling constant depends strongly on Z:
+\[A(L,S) \propto Z^4\]
+Spin-orbit interaction for each electron is strong, so each $\vec{j}_i = \vec{l}_i +\vec{j}_i$ can be computed for each electron and the sum would give $J$.
+
+Then:
+\[J = |j_1-j_2|,...,|j_1+j_2| \quad \text{in steps of 1}\] 
+
+\subsection{Parity in many-electron atoms}
+
+The parity is a product of the parity of individual atoms:
+
+\[(-1)^{l_1}(-1)^{l_2}(-1)^{l_3}\times...\times(-1)^{l_n} = (-1)^{\sum_i l_i}\]
+
+For the term symbol, odd parity has a $o$ superscript while even parity has nothing:
+\[ ^{2S+1}L_J^o\]
+
+\subsection{Hyperfine structure}
+
+Protons are also fermions with spin angular momenta $frac12$. Thus there can also be a magnetic dipole moment associated with protons:
+
+\[\vec{\mu}_I = g_N \left(\frac{m_e}{m_p}\mu_B\right)\frac{\vec{I}}{\hbar} = g_N \mu_N \frac{\vec{I}}{\hbar}\]
+
+The energy level shifts are analogous to spin orbit interactions, and are dependent on the interaction of the nuclear magnetic moment with total electron angular momentum and total electron spin magnetic moment:
+
+\[\Delta E_{HFS} \propto \vec{I} \cdot \vec{J} \text{ and} \propto \vec{I} \cdot \vec{S}\]
+The energy shifts are known as hyperfine structure. These lift the degenerate energy levels by $F$, given by:
+\[\vec{F} = \vec{J} + \vec{I}\]
+Again, they take values of:
+\[F = |J-I|,...,|J+I| \text{ in steps of 1}\]
+
+\section{Atomic Spectra}
+
+\subsection{Fermi's Golden Rule}
+The transition probability between an initial and final state can be given by:
+\[T_{if} = |\langle \Psi_f | V_{dip}|\Psi_i\rangle|^2\]
+
+Page 84 onwards gives an example of an electron in an oscillating electric field. 
+
+\subsection{Selection Rules revisited}
+\begin{description}
+    \item [Rigorous Rules] These rules must be followed
+    \begin{itemize}
+        \item $\Delta J = 0, \pm 1$ but $J=0 \not\to J' = 0$
+        \item $\Delta M_J=0,\pm1$
+        \item Parity must change
+    \end{itemize}
+    \item [Strong Transitions] These rules, if not followed, give rise to weak transitions
+    \begin{itemize}
+        \item  $\Delta S = 0$
+        \item $\Delta L = 0, \pm 1$ but $L=0 \not \to L' = 0$
+    \end{itemize}
+\end{description}
+See page 87 for example. 
+
+\subsection{Photon emission and absorption}
+Consider a two state system with energy and number of atoms $(E_1,N_1)$ and $(E_2,N_2)$. The population can be expressed as:
+
+\begin{align*}
+    \frac{dN_1}{dt} = -C\Upsilon(\upsilon_{12})N_1 + AN_2 + B\Upsilon(\upsilon_{12})N_2
+    \frac{dN_2}{dt} = +C\Upsilon(\upsilon_{21})N_1 - AN_2 - B\Upsilon(\upsilon_{12})N_2
+\end{align*}
+
+Equating both to zero, and expressing in terms of the Maxwell-Boltzmann distribution:
+
+\[A = \frac{8\pi h \upsilon^3_{12}}{c^3}B\]
+And:
+\[B = \frac{2\pi}{3\hbar^2}\left(\frac{1}{4\pi\epsilon_0}\right)\left|\int\Psi^*_2\vec{\mu}\Psi_1d\tau\right|^2\]
+
+Where:
+\begin{align*}
+    A &\equiv \text{Einstein A coefficient for spontaneous emission}\\
+    B &\equiv \text{Einstein B coefficient for stimulated emission}
+\end{align*}
 
 \end{document}
