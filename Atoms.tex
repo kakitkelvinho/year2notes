@@ -310,7 +310,7 @@ So
 \[H_{SO} \propto \frac{Z^4}{n^3}\]
 
 \subsection{Spin Orbit Operator}
-The spin orbit hamiltonian derived before does not have a fixed projection on the z axis. However, $J=L+S$ does. This gives:
+The spin orbit Hamiltonian derived before does not have a fixed projection on the z axis. However, $J=L+S$ does. This gives:
 
 \[H_{SO} = hc A(L,S) \vec{L} \cdot {S}\]
 Where:
@@ -319,7 +319,7 @@ Where:
 As $J^2 = (L+S)^2 = L^2+S^2+2L\cdot J$, $\vec{L}\cdot\vec{S}$ can be rewritten as:
 \[ \vec{L}\cdot\vec{S} = \frac12 [\vec{J}^2 - \vec{L}^2 - \vec{S}^2]\]
 
-By first order pertubation theory (see QM notes), the (first order) energy shift is:
+By first order perturbation theory (see QM notes), the (first order) energy shift is:
 
 \[\frac{\Delta E_{SO}}{hc} = \frac{A(L,S)}{2}[J(J+1) - L(L+!) - S(S+1)]\]
 
@@ -328,7 +328,7 @@ Which the Term symbol now makes sense:
 
 The \textit{Lande Interval Rule} is known as:
 
-\[\Delta E_{SO}(J) - \DeltaE_{SO}(J-1) = hc A(L,S) J\]
+\[\Delta E_{SO}(J) - \Delta E_{SO}(J-1) = hc A(L,S) J\]
 
 \subsection{Coupling Schemes}
 \subsubsection{$LS$ coupling (Russell-Sanders)}
@@ -421,4 +421,311 @@ Where:
     B &\equiv \text{Einstein B coefficient for stimulated emission}
 \end{align*}
 
+\section{Zeeman Effect}
+
+\subsection{Normal Zeeman}
+Total Spin $S = 0$. Therefore related to the magnetic moment generated from the orbital angular momentum $L$. Split into $2L+1$ energy levels. Transition rules: $\Delta M_L = 0, \pm 1$.
+
+\subsection{Anomalous Zeeman}
+This gives rise to additional splitting beyond the split arising from spin-orbit interaction.
+
+When $S\neq 0$. Unfilled orbitals, unpaired electrons. Spin-orbit interactions occur, and the vector $J=L+S$ precesses about the Lamour frequency under $B$ field.
+
+The Zeeman splitting is smaller than that from spin orbit interaction. THis leads to transitions of $\Delta M_J = 0, \pm 1$.
+
+The Lande g-factor is given by:
+\[ g_J = 1 + \left[\frac{J(J+1)+S(S+1)-L(L+1)}{2J(J+1)}\right]\]
+
+
+\section{Stark Effect}
+Pertubation given by:
+\[ V_F = eF_zz\]
+
+\subsection{In Weak Fields}
+Gives rise to shifts and splittings:
+\begin{itemize}
+    \item Degenerate energy levels with different orbital angular momentum quantum number $\implies$ Linear Stark Shifts
+    \item Non degenerate $\implies$ quadratic Stark Shifts
+\end{itemize}
+
+\subsubsection{Quadratic Stark Effect}
+No $l$ degeneracy means no electric dipole moment means no Stark shifts. However, the E field induces an electric dipole. Using second order Perturbation theory, the transition in the ground state of H:
+
+\[\Delta E_F = e^2 F_z^2 \sum_{n'}\frac{|\int \si^*_{n10}\hat{z}\psi_{100}d\tau|^2}{E_{100}-E_{n'10}}=-\frac12\alpha F^2_z\]
+
+The induced electric dipole moment can be obtained by $dE_F/dF_z=\alpha F_z$, so:
+\[\alpha = 7.42\times 10^{-41}Cm^2V^{-1}\]
+
+The quadratic effect lowers the energy of an isolated non-degenerate energy level. This is due to the induced electric dipole moment being oriented parallel to the field vector.
+
+\subsubsection{Linear Stark Effect}
+
+Occurs when atom possesses an intrinsic electric dipole moment. This is when the electron is in an orbital with $l$ (orbital angular momentum number) that is degenerate with other orbitals (such that the combination of spherical harmonics do not equal zero). The eigenstates take the form:
+
+\begin{align*}
+    \psi_1 &= \psi_+= \frac{1}{\sqrt{2}}(\psi_{200}+\psi_{210})\\
+    \psi_2 &= \psi_- =\frac{1}{\sqrt{2}}(\psi_{200}+\psi_{210})\\
+    \psi_3 &= \psi_{2,1,-1}\\
+    \psi_4 &= \psi_{2,1,+1}
+\end{align*}
+
+\paragraph{Energy Shifts}
+The field does not induce a dipole moment, so the energy shift is:
+\[ \Delta E_F \propto F_z\]
+
+\section{Born-Oppenheimer Approximation}
+
+Their insight was that electronic wavefunctions are insensitive to the changes in positions of the nuclei. After a lot of math:
+
+\[\left[-\frac{\hbar^2}{2\mu_{AB}}\nabla^2_R + E_{\text{elec}}\right]v(\vec{R}) = Ev(\vec{R})\]
+The electron energies act as an effective potential to the movement of the nuclei.
+
+\subsection{Hydrogen Ion}
+The $H_2^+$ ion has one electron and two protons. In atomic units, the Hamiltonian is given by the electron's KE and three terms of $E_{\text{elec}}$:
+\[\hat{H}_{\text{elec}} = -\frac{\nabla_r^2}{2}-\frac{1}{r_A}-\frac{1}{r_B}+\frac{1}{R}\]
+
+\subsection{LCAO}
+When the electron is close to either of the proton, the wavefunction reduces to the 1s orbital. Thus, the total wavefunction has to be a superposition of the two. This method is known as LCAO, or Linear Combination of Atomic Orbitals.
+
+\[\psi = C_1\phi_{1s}(r_A) + C_2\phi_{1s}(r_B) \]
+
+$H^2_+$ is a homonuclear diatomic molecule, so the probability of finding the electron at either proton has to be the same (symmetry). Thus, in the superposition, the coefficient squared has to be equal. 
+
+\[|C_1|^2 = |C_2|^2 = |C|^2\]
+
+In the superposition: If add = symmetric = gerade. If minus = antisymmetric = ungerade.
+
+Normalising to their respective coordinates $dr_A, dr_B$:
+
+\begin{align*}
+    \langle \psi | \psi \rangle &= 1\\
+    \therefore C &= \frac{1}{\sqrt{2(1\pm I(R)}}\\
+    \text{where } I(R) &= \langle \phi(r_A)|\phi(r_B)\rangle = \langle \phi(r_B)|\phi(r_A)\rangle  
+\end{align*}
+
+See page 112 onwards for a further discussion. 
+
+\subsection{Hydrogen molecule}
+The Hamiltonian is given by the two electron's KE and the potential energies due to the repulsion and attraction:
+\[\hat{H}_\text{elec} = -\frac{\nabla^2_1}{2} - \frac{\nabla_2^2}{2} - \frac{1}{r_{A1}} - \frac{1}{r_{A2}} - \frac{1}{r_{B1}} - \frac{1}{r_{B2}} + \frac{1}{r_{12}} + \frac{1}{R}\]
+
+The full wavefunction is:
+\[\psi^{S,T} = \psi(\vec{R};\vec{r}_i)\chi^{S,T}\]
+With S,T referring to the singlet or triplet states.
+
+Since there are two electrons, if the spatial part is symmetric, the spin part must be antisymmetric. The mathematical treatment is done from page 122 to 126. 
+
+The expression giving the energy is:
+\[E_\pm = 2E_{1s} + \frac1R + \frac{J(R)}{1\pm I(R)^2} \pm \frac{K(R)}{1\pm I(R)^2}\] 
+Here, I(R) is the overlap integral, K(R) is the Exchange integral and J(R) is the Colomb Integral.
+
+In summary:
+\begin{itemize}
+    \item Singlet state has energy $E_+$. Shifted to lower energy.
+    \item Triplet state has energy $E_-$. Shifted to higher energy. 
+\end{itemize}
+The singlet state has a symmetric spatial wavefunction, leading to a nonzero probability of finding the electrons between the two nuclei. This leads to a minimum of electronic energy, forming a stable molecule. 
+
+\subsubsection{Molecular Orbitals}
+The equivalent to the 1s, 2s, 2p orbitals in atoms, the molecules have:
+
+\begin{align*}
+    1\sigma_g &= \psi_+ = \frac{1}{\sqrt{2}}[\phi_{1s}(\vec{r}_a)+\phi_{1s}(\vec{r}_B)]\\
+    1\sigma_u &= \psi_+ = \frac{1}{\sqrt{2}}[\phi_{1s}(\vec{r}_a)-\phi_{1s}(\vec{r}_B)]\\
+\end{align*}
+Where `g' refers to gerade and `u' refers to ungerade.
+
+The ground state $\psi^S$ (bonding) is:
+\[1\sigma_g^2\]
+Whereas the excited state $\psi^T$ (antibonding) is:
+\[1\sigma_g1\sigma_u\]
+
+\subsection{Heteronuclear Molecule}
+No gerade or ungerade, constants are not equal, leads to hybrid orbitals.
+
+\section{Nuclear Motion}
+N nuclei lead to 3N nuclear degrees of freedom:
+\begin{enumerate}
+    \item Translational: 3 degrees in 3D
+    \item Vibrational: $3N-6$, unless linear (diamotic), then $3N-5$.
+    \item Rotational: About its COM. 3 except for linear molecules, which only has 2 degrees of freedom (only 2 axis).
+\end{enumerate}
+
+
+The Kinetic energy part of the Hamiltonian can be decomposed in spherical coordinates. 
+
+\subsubsection{Rotation}
+The rotational energy is given as:
+
+\[E_\text{rot} = \frac{\hbar^2}{2\mu_{AB}R^2} J(J+1)\]
+
+Rigid rotor assumption: Internuclear distances stay constant, unaffected by rotation. Its moment of inertia becomes:
+
+\[ I = M_A(R-x)^2+M_Bx^2\]
+Where the masses are the respective masses of the two nuclei, and R is the internuclear distance. 
+
+If $R=R_e$, then in the COM frame of reference:
+\[I_e = \mu_{AB}R^2_e\]
+So:
+\[E_\text{rot} = \frac{\hbar^2}{2I_e}J(J+1) = BJ(J+1)\]
+
+The rotational constant is given by $B$.
+
+Divide by $hc$ to get the constant in terms of $cm^{-1}$:
+\[ B = \frac{h}{8\pi^2c\mu_{AB}R^2_e}\]
+
+Thus:
+\[ E_\text{rot} \propto \frac{1}{\mu_{AB}} \propto \omega_\text{rot}\]
+
+\subsubsection{Vibration}
+The term related to vibrational energies can be approximated (by Taylor expansion) to be a quantum harmonic oscillator around $R_e$. 
+
+With:
+\[k = \left.\frac{d^2V}{dx^2}\right|R=R_e\]
+The SE becomes:
+\[\left[ -\frac{\hbar^2}{2\mu_{AB}}\frac{\partial^2}{\partial R^2} + \frac12 k(R-R_e)^2 + V(R_e)\right] F(R) = E_\text{vib}F(R)\]
+
+The energies are given as:
+\[E_v = \hbar \omega_0(v+\frac12)\]
+Where $v$ is the vibrational quantum number. The fundamental vibrational frequency is:
+\[\omega_0 = \sqrt{\frac{k}{\mu_{AB}}}\]
+Thus the zero point energy of the oscillator is:
+\[E_{v=0} = \frac12\hbar\sqrt{\frac{k}{\mu_{AB}}} \neq 0\]
+
+
+\subsection{Total Energy of Diatomic Molecule}
+
+When:
+\begin{enumerate}
+    \item $v$ is small (near bottom of well so harmonic approximation is reasonable)
+    \item $J$ is small (centrifugal distortion is minimal, i.e. the molecule is not rotating rapidly causing the bond length to increase
+\end{enumerate}
+\[ E_{AB} = V(R_e) + BJ(J+1) + \hbar\sqrt{\frac{k}{\mu_{AB}}}(v+\frac12)\]
+
+\subsubsection{Corrections to the Energy}
+
+\paragraph{Rotational Energy}
+The rotational energies can be adjusted by considering:
+
+\begin{enumerate}[i]
+    \item Adjust the rotational constant at high $v$ to be:
+    \[B_v = \langle|\frac{\hbar^2}{2\mu_{AB}R^2}|\rangle\]
+    \item The centrifugal distortion at high $J$ can be adjusted by introducing a second order correction, $E_J^(2)$:
+    \[ E_J^(2) = -D_vJ^2(J+1)^2\]
+    Where $D_v$ is the \textit{centrifugal distortion constant} and is much smaller than $B_v$ typically.
+\end{enumerate}
+
+This leads to:
+\[E_J = B_vJ(J+1) - D_vJ^2(J+1)^2\]
+
+\paragraph{Vibrational Energies}
+The vibrational energies can be adjusted by replacing the harmonic potential by Morse's potential at higher $v$:
+\[ V_\text{Morse}(R) = -D_e + D_e[1-e^{-\alpha(R-R_e)}]^2\]
+
+Expanding in terms of $(R-R_e)$:
+\[ \alpha = \sqrt{\frac{k}{2D_e}}\]
+
+The energy of each state in Morse potential can be expressed as:
+
+\[E_v = \hbar \omega_0(v+\frac12) - \frac{[\hbar\omega_0(v+\frac12)]}{4D_e}\]
+Where
+\[\omega_0 = \alpha \sqrt{\frac{2D_e}{\mu_{AB}}}\]
+
+\section{Molecular Spectra}
+
+\subsection{Spectra}
+Molecular spectra are composed of three main kinds of transitions:
+\subsubsection{Pure Rotational Transitions}
+    \begin{itemize}
+        \item Does not involve change in electronic state or vibrational state
+        \item Strong for molecules with non-zero electric dipole moments an oscillating EM field can interact with (i.e. LiF, HCl)
+        \item Homonuclear diatomic molecules do not undergo pure rotational transitions within the electric dipole approximation (i.e. $H_2$, $D_2$, $H_2^+$)
+        \item Transitions occur at frequences on the order of rotational energy spacings, which is the microwave region
+    \end{itemize}
+    
+By Fermi's Golden Rule:
+
+\[T_{if} = [\langle \psi_f|V_\text{dip}|\psi_i\rangle]^2\]
+Where $V_\text{dip} = -\vec{\mu}_\text{elec} \cdot \vec{F}$
+
+Rewriting in terms of spherical harmoincs, it is determined that: $\Delta J = J' - J = \pm 1$ and $\Delta M_J = 0$. Thus:
+\begin{align*}
+    \Delta E_J &= E_{J+1} -E_J\\
+    &= B(J+1)(J+2) - BJ(J+1)
+    &= 2B(J+1)
+\end{align*}
+
+Thus the spacing between each J increases by $2B$ (previous energy spacing $+2B$).
+
+\subsubsection{Vibrational Rotational Transitions}
+
+\begin{itemize}
+    \item Do not involve change in electronic state
+    \item Involves changes in the rotational and vibrational states
+    \item Same order of magnitude as $\omega_0$, lies in Infrared region
+    \item \[ \Delta v = \pm 1\]
+    \item \[ \Delta J = \pm 1\]
+\end{itemize}
+
+\paragraph{P branch and R branch}
+The rotation vibration spectra exhibit two groupings of lines:
+\begin{itemize}
+    \item $\Delta J = -1$ is the P branch:
+    \[\Delta E_\text{ro-vib} = E(v+1,J-1) - E(v,J) = -2BJ+\hbar\omega_0\]
+    \item $\Delta J = +1$ is the R branch:
+    \[\Delta E_\text{ro-vib} = E(v+1,J+1)-E(v,J) = 2B(J+1)+\hbar\omega_0\]
+\end{itemize}
+
+\subsubsection{Electronic Transitions}
+Diatomic molecules have axial symmetry, i.e. an axis which can be taken as the $z$ axis which would have a project of momentum $L_z$ which is constant. Let the quantum number from the eigenvalue of $L_z$ be $\Lambda$. The term symbol is given as:
+\[ ^{2S+1}\Lambda^{+,-}_{g,u}\]
+Where $+,-$ denotes reflection symmetry and $g,u$ represents the orbital symmetry.
+
+Similar to S,P,D,F,G,...:
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c||c|c|c|c|c}
+         $|\Lambda|=$& 0 & 1 & 2 & 3 & ... \\
+         \hline\hline
+         & $\Sigma$ & $\Pi$ & $\Delta$ & $\Phi$ & ...
+    \end{tabular}
+    \caption{Molecular term symbols}
+    \label{tab:molets}
+      \begin{tabular}{c||c|c|c|c|c}
+         $\lambda$& 0 & 1 & 2 & 3 & ... \\
+         \hline\hline
+         & $\sigma$ & $\pi$ & $\delta$ & $\phi$ & ...
+    \end{tabular}
+    \caption{One-electron Molecular Orbitals Molecular term symbols}
+    \label{tab:onemolets}
+\end{table}
+
+\subsubsection{Selection Rules}
+Occurs in ultraviolet spectrum:
+\begin{align*}
+    \Delta \Lambda &= 0, \pm 1\\
+    \Delta S &= 0\\
+    \text{Symmetry must change } g\to u &\text{ or } u \to g\\
+    + \to + &\text{ or } - \to -\\
+    \Delta v &= \text{any value}\\
+    \Delta J &= 0, \pm 1
+\end{align*}
+
+\subsection{Frank-Condon Principle}
+From Fermi's Golden Rule:
+\[ T_{if} \propto \left[ \langle \psi_f|\vec{r}|\psi_i\rangle \right]^2\]
+
+For a diatomic molecule with wavefunction:
+\[\Psi(R;r) = v(R)\psi(R;r)\]
+By considering only the vibrational part $F(R)$, the transition probability is:
+\[T_{if} = \left[ \langle \psi_f|\vec{r}|\psi_i\rangle \right]^2 \times \underset{\text{Frank-Condon Factor}}{[\langle F_f(R)|F_i(R)\rangle ]^2}\]
+
+Where this is known as the Frank Condon overlap integral:
+\[[\langle F_f(R)|F_i(R)\rangle ]^2 = \int F_f^*(R) F_i^*(R) dR\]
+
+The band with the highest transition probability is the one for which the
+transition is “vertical”. The molecule finds itself in the excited electronic state
+with the same inter-nuclear separation as it had in the ground electronic state.
+
+The most probable excitation is in the classical turning point.
 \end{document}
