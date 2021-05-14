@@ -1,0 +1,373 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[a4paper, total={6.5in, 9.5in}]{geometry}
+\usepackage[T1]{fontenc}
+
+\usepackage{charter}
+
+
+
+\title{Mathematics for Theoretical Physics}
+\author{Kelvin Ho}
+\date{April 2021}
+
+
+
+
+
+\begin{document}
+\maketitle
+
+\section{Tensors}
+
+Tensors are objects which are invariant under a change of basis.
+
+\subsection{Kronecker Delta}
+
+This is defined as:
+\[
+\delta_{ij} = 
+\begin{cases}
+1 \, \text{if } i = j\\
+0 \, \text{otherwise}
+\end{cases}
+\]
+
+\subsection{Change of basis}
+The two dimensional rotational transformation is given by:
+\[
+\begin{pmatrix}
+x'\\
+y'\\
+\end{pmatrix} = 
+\begin{pmatrix}
+\cos\theta & \sin\theta\\
+-\sin\theta & \cos\theta
+\end{pmatrix}
+\begin{pmatrix}
+x\\y
+\end{pmatrix}
+\]
+
+
+In general, the bases transform by:
+\[ \vec{e}_i' = S_{ij}\vec{e}_j\]
+Whereas the coordinates transform by:
+\[ x_i' = (S^{-1})_{ij}x_j=L_{ij}x_j\]
+
+The \textbf{transformation matrix} is orthogonal:
+For rows:
+\[ L_{ik}L_{jk} = \delta_{ij}\]
+For columns:
+\[ L_{ki}L+{kj} = \delta_{ij}\]
+This is to say if you take two different rows/columns and sum over the product of the corresponding element it will be zero.
+
+\subsection{Tensor Operations}
+
+\paragraph{Outer Product}
+This is defined by:
+
+\[ A = a\otimes b\]
+
+Which in Einstein notation is:
+\[ A_{ij} = a_i b_j\]
+
+For example, if $a = (u_1,u_2,u_3,...)$ and $b = (v_1,v_2,v_3,...)$ are vectors:
+\[
+a\otimes b = 
+\begin{pmatrix}
+u_1v_1&u_1v_2&u_1v_3&\dots\\
+u_2v_1&u_2v_2&u_2v_3&\dots\\
+u_3v_1&u_3v_2&u_3v_3&\dots\\
+\vdots&\vdots&\vdots&\ddots
+\end{pmatrix}
+\]
+
+\paragraph{Contraction} This reduces a tensor by 2 orders. Two subscripts are equated, and the tensor is summed. For a second order:
+\[T_ii = Tr(T)\]
+Equating the subscripts results in the trace of the tensor (Order 2 to 0).
+
+A higher order tensor is represented by:
+\[T_{i1,i2,i3,...,iN}' = L_{i1j1}L_{i2j2}...L_{iNjN}T_{j1,j2,...,jN}\]
+Contracting:
+
+\begin{align*}
+T_{i1,ip,ip,...,iN}' &= L_{i1j1}\underset{=\delta{jpjq}}{L_{ipjp}L_{ipjq}}...L_{iNjN}T_{j1,j2,...,jN}\\
+&=L_{i1j1}L_{ipjp}L_{ipjq}...L_{iNjN}T_{j1,j2,...,jN}
+\end{align*}
+
+
+\subsection{Levi-Civita Symbol}
+The permutation symbol is given by:
+\[
+\epsilon_{ijk} =
+\begin{cases}
+0 \text{ if} \, i=j,j=k,i=k\\
++1 \text{ if even p.} \,i,j,k\in (1,2,3),(2,3,1),(3,1,2) \\
+-1 \text{ if odd p.} \, i,j,k\in(1,3,2),(3,2,1),(2,1,3)
+\end{cases}
+\]
+
+Some properties:
+\begin{align*}
+    \delta_{ij}\epsilon_{ijk} &= 0\\
+    \epsilon_{ipq}\epsilon_{jpq} &= 2\delta_ij\\
+    \epsilon_{ijk}\epsilon_{ijk} &= 6\\
+    \epsilon_{ijk}\epsilon_{pqk} &= \delta_{ip}\delta_{jq} - \delta_{iq}\delta_{jp}
+\end{align*}
+
+In general:
+\[
+\epsilon_{ijk}\epsilon_{pqr} = 
+\begin{vmatrix}
+\delta_{ip}&\delta_{iq}&\delta_{ir}\\
+\delta_{jp}&\delta_{jq}&\delta_{jr}\\
+\delta_{kp}&\delta_{kq}&\delta_{kr}
+\end{vmatrix}
+\]
+This is useful because:
+\[\text{det}(A)\epsilon_{ijk} = A_{il}A_{jm}A_{kn}\epsilon_{lmn}\]
+
+\subsection{Quotient Theorem}
+If $B$ is an order $M$ tensor and $C$ is an order $N+M-2$ tensor, then $A$ must be an order $N$ tensor, where:
+\[ A_{i1,i2,...,iN}B_{j_1,j_2,...,jM} = C\]
+
+
+\section{Linear ODE}
+
+\paragraph{Definition}
+Linear ODEs are in the form:
+\[ a_0(x)y(x) + a_1y'(x)+a_2y''(x)+...=b(x)\]
+
+\subsection{Linear First Order ODE}
+They are of the form:
+\[y'(x) + P(x)y(x)=Q(x)\]
+
+\subsubsection{Inhomogenous ODE}
+Notice that for $S(x) = \int P(x)dx$:
+\[ \frac{d}{dx}(ye^S)= e^S(y' + Py) = e^SQ\]
+Integrating both sides yields:
+\[y(x) = e^{-S(x)}\int e^S Q(x) dx + C\]
+
+\subsection{Laplace Transforms}
+Taking the Laplacian is essentially:
+\[ L[f] = \int^\infty_0 e^{-px} f(x)dx\]
+Useful in inhomogenous ODE.
+
+\subsection{Wronskian}
+General solution to an inhomogenous ODE is:
+\[ y(x) = y_p(x) + y_c(x)\]
+Where $y_p(x)$ is the particular solution and $y_c(x)$ is the complimentary solution which is a linear combination of solutions to the homogeneous equations. 
+
+Question: How do we know that they are all linearly independent?
+
+\paragraph{Definition}
+If a combination of solutions is linearly dependent, then there exists:
+\[ c_1y_1(x) + c_2y_2(x) + c_3y_3(x)+...+c_ny_n(x) = 0\]
+Differentiating this $n-1$ times and rewriting in terms of matrix transformation:
+\begin{align*}
+    \begin{pmatrix}
+    y_1(x) & y_2(x) & y_3(x)&\dots\\
+    y_1'(x)& y_2'(x) & y_3'(x)&\dots\\
+    \vdots&\vdots&\vdots&\ddots\\
+    y_1^{(n-1)}(x) & y_2^{(n-1)}(x) & y_3^{(n-1)}(x)&\dots\\
+    \end{pmatrix} 
+    \begin{pmatrix}
+    c_1\\c_2\\\vdots\\c_n
+    \end{pmatrix}&=0
+\end{align*}
+
+The determinant of the matrix containing $y(x)$s is known as the \textbf{Wronskian}. If it is not equal to zero, then the constants must all be zero\footnote{Because the inverse exists, and multiplying both sides by the inverse would give the constants equalling zero?}.
+
+\subsection{Variation of Parameters}
+Again, given an inhomogeneous ODE, first assume that the homogeneous version is solved with the \textit{complimentary solution} given by:
+\[y_c(x) = c_1y_1(x)+c_2y_2(x)+...+c_ny_n(x)\]
+Thus, consider a \textit{particular solution} of the form:
+\[y_p(x) = k_1(x)y_1(x)+k_2(x)y_2(x)+...+k_n(x)y_n(x)\]
+Where $n$ is the order of the ODE.
+\subsubsection{Second order}
+This can be generalised to higher orders. For now, consider:
+\[ a_2y''(x) + a_1y'(x) + a_0y(x) = f(x)\]
+Given:
+\begin{align*}
+    y_c(x) &= c_1y_1(x) + c_2y_2(x)\\
+    y_p(x) &= k_1(x) y_1(x) + k_2(x)y_2(x)
+\end{align*}
+This can be substituted in the ODE. Require that:
+\[ k_1(x)'y_1(x)+k_2(x)'y_2(x) = 0\]
+Upon rearranging, this implies:
+\[ f(x) = a_2(k'_1(x)y'_1(x)+k'_2(x)y'_2(x))\]
+Subsequently, as $y_1(x),y_2(x)$ are known solutions (from the complimentary solutions), the two equations can be used to give:
+\begin{align*}
+    k_1(x) &= -\int \frac{y_2(x) f(x)}{W(y_1,y_2)} dx\\
+    k_2(x) &= \int \frac{y_1(x)}{W(y_1,y_2)}dx\\
+    \text{Where}\, W(y_1,y_2) &= \begin{vmatrix}
+    y_1(x)&y_2(x)\\
+    y'_1(x)&y'_2(x)
+    \end{vmatrix}
+    = y1(x)y'_2(x) - y'_1(x)y_2(x)
+\end{align*}
+
+\subsection{Dirac Delta Function}
+For weird stuff use integration by parts.
+
+\subsection{Green's Function}
+Given a differential equation with a forcing function, solving it in terms of Green's function and the Dirac Delta function provides the solution to the DE via integrating the product of Green's function and the driving function. Example:
+
+\begin{align*}
+    y''+\omega^2 y &= f(x) \\
+    \frac{d^2}{dx^2}G(x,t) + \omega^2 G(x,t) &= \delta(x-t) 
+\end{align*}
+The solution would be:
+\[y = \int G(x,t) f(t) dt\]
+This can be shown by substituting this solution into the DE and solving to find it equal to $f(x)$. 
+
+Note that \textbf{boundary conditions} and \textbf{dis/continuities} must be satisfied.
+
+\subsubsection{Dis/continuity conditions}
+For $G(x,t)$:
+\begin{align*}
+    \lim_{\epsilon\to0}\{G'(t+\epsilon,t)-G'(t-\epsilon,t)\} &= \frac{1}{a_2(x)}\\
+    \lim_{\epsilon\to0}\{G(t+\epsilon,t)-G(t-\epsilon,t)\} &= 0
+\end{align*}
+
+Thus solving ODEs with Green's Function requires:
+\begin{enumerate}
+    \item Replacing the $y(x)$ with Green's Function
+    \item Solving for the homogenous ODE formed with Green's Functions, writing the set of solutions $A(t)f(x)$ before and after the point of discontinuity
+    \item Solve the solutions with the boundary conditions
+    \item Solve for the dis/continuity conditions
+    \item Integrate with respect to $t$ (Be careful with the limits!)
+    \item Combine with the complimentary solution and solve with boundary conditions
+\end{enumerate}
+
+\section{Sturm-Liouville Theory}
+The SL operator is:
+\[L(x) = -\left[\frac{d}{dx}\left(p(x)\frac{d}{dx}\right)+q(x) \right]\]
+And the Sturm-Liouville form becomes:
+\[ L(x)y(x) = \lambda \rho(x)y(x)\]
+The eigenvalue $\lambda$ is defined by boundary conditions, which would make the ODE become a SL problem.
+
+\subsection{Lagrange Identity}
+It can be shown with integration by parts, that over range $[a,b]$:
+\[ \langle Lu|v\rangle - \langle u|Lv\rangle = p(x)W(u,v)\]
+Where $W(u,v)$ is the Wronskian.
+
+The SL operator is self-adjoint (and so it is Hermitian):
+\begin{align*}
+    L&=L^\dagger\\
+    (L[u],v) &= (u,L[v])
+\end{align*}
+
+\begin{description}
+    \item [Eigenvalues are real] To show this, use the Hermitian identity. Substitute with the eigenvalue and expand it in terms of integration.
+    \item [Eigenfunctions can always be real] This is done by writing out the SL problem and its conjugate. Note that taking the conjugate does not change the operator (self-adjoint) and eigenvalue (real). Then produce a solution which is a combination of it and its conjugate, producing real functions. This can be used to show that these real functions have the same eigenvalues as their respective imaginary eigenfunctions.
+    \item [Non degenerate eigenfunctions are orthogonal] Again using the Hermitian identity it can be shown:
+    \[\int_a^b \rho(x) \psi_a(x)\psi_b(x)dx = 0\]
+\end{description}
+
+\subsection{Gram-Schmidt Orthogonalisation}
+Begin with:
+\[\psi^{(1)}=\psi_{k+1}\]
+Normalise it:
+\[ \int^b_a \rho(x) \psi^{(1)}\psi^{(1)}dx =1\]
+Proceed with:
+\[\psi^{(2)}=\psi_{k+2}-\psi^{(1)}\left(\rho\psi^{(1)}\psi_{k+2}\right)\]
+And normalise. Then:
+\[\psi^{(3)} = \psi_{k+3} -\psi^{(2)}\int^b_a\psi^{(2)}\psi_{k+3}\rho dx  - \psi^{(1)}\int^b_a \psi^{(1)}\psi_{k+3}dx\]
+
+\subsubsection{Closure Condition}
+\[ \rho(t) \sum_{i=1}^\infty \psi^*_i(t)\psi(x)=\delta(x-t)\]
+
+
+\section{Integral Transform}
+
+
+\section{PDEs}
+
+General form of a linear first order PDE is:
+\[A(x,y)\frac{\partial u}{\partial x} + B(x,y)\frac{\partial u}{\partial y}+C(x,y)u = R(x,y)\]
+
+\subsection{Fixed solution}
+\[A(x,y)\frac{\partial u}{\partial x} + B(x,y)\frac{\partial u}{\partial y} =0\]
+
+Consider solutions of the form:
+\[ u(x,y) = f(p)\]
+Where $p$ is some fixed combination of $x$ and $y$.
+
+If $p$ remains constant:
+\[ dp =\frac{\partial p}{\partial x} dx + \frac{\partial p}{\partial y} dy\ = 0\]
+Which means:
+\[\frac{dx}{dy} =\frac{A(x,y)}{B(x,y)}\]
+Upon rearranging, integration and solving for the constant would give $p$.
+
+\subsection{$R=0$}
+The PDE is:
+\[ A(x,y)\frac{\partial u}{\partial x} + B(x,y)\frac{\partial u}{\partial y} +C(x,y)u=0\]
+This time, consider:
+\[u(x,y) = h(x,y)f(p)\]
+
+It can be shown that a solution can be found by first finding $f(p)$ by first method and then finding a trivial $h(x,y)$ (such as assuming it is solely a function of $x$ and then $y$ and then superposition).
+
+\subsection{Non-homogenous PDE}
+\[ A(x,y)\frac{\partial u}{\partial x} + B(x,y)\frac{\partial u}{\partial y} +C(x,y)u=R(x,y)\]
+A solution, with $w$ being the general and $v$ being the particular:
+\[u(x,y) = v(x,y)+w(x,y)\]
+
+\subsection{Linear 2nd Order PDE}
+Consider the special form:
+\[A\frac{\partial^2u}{\partial x^2} + B\frac{\partial^2u}{\partial x \partial y} + C\frac{\partial^2 u}{\partial y^2} = 0\]
+
+\begin{itemize}
+    \item $B^2 > 4AC$ is hyperbolic: propagating oscillations
+    \item $B^2 = 4AC$ is parabolic: travelling processes
+    \item $B^2 < 4AC$ is elliptic: steady states
+\end{itemize}
+Again consider solutions of the form:
+\[u(x,y) = f(p)\]
+Additionally request that:
+\[\frac{\partial p}{\partial x} = C_1 \quad\text{and}\quad \frac{\partial p}{\partial y} = C_2\]
+This must mean that $p$ is a linear function of $x$ and $y$, so request that:
+\[f(p)=f(ax+by)\]
+Re-substitution would give:
+\[(Aa^2+Bab +Cb^2)\frac{d^2f(p)}{dp^2} = 0\]
+
+If $\frac{d^2f(p)}{dp^2} = 0$, it follows:
+\begin{align*}
+    \frac{d^2f(p)}{dp^2} &= 0\\
+    \frac{df(p)}{dx} &= k\\
+    f(p) &= kp + m
+\end{align*}
+Which would give trivial solutions.
+
+Consider:
+\[Aa^2+Bab +Cb^2=0\]
+But where $\lambda = b/a$:
+\[C\lambda^2 + B\lambda + A = 0\]
+Then:
+\[\lambda_{1,2}=\left(\frac{b}{a}\right)_{1,2}=\frac{-B\pm\sqrt{B^2-4AC}}{2C}\]
+
+Then the solutions (omitting constants without loss of generality):
+ \[ u(x,y) = f(x+\lambda_1 y)+g(x+\lambda_2y)\]
+
+\subsection{Speical Case: Parabolic}
+If it is parabolic, there is only one solution:
+\[u(x,y) = f\left(x-\frac{B}{2C}y\right)\]
+Then we must find an additional $h(x,y)$:
+\[u(x,y) = h(x,y)f\left(x-\frac{B}{2C}y\right)\]
+
+\subsection{Green's Identity}
+\subsection{Poisson's Equation}
+\subsection{Boundary Conditions}
+\subsection{Method of Images}
+
+\section{Fluid Mechanics}
+\subsection{Bernoulli's Equation}
+\subsection{Channel Flow}
+
+\subsubsection{Poiseuille Flow}
+In general parabolic
+
+\end{document}

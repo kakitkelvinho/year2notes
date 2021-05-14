@@ -103,7 +103,7 @@ When a photon is absorbed, the electron `jumps'. The selection rules are:
 
 \begin{itemize}
     \item $\Delta n$: Any value
-    \item $\Delta l = \pm 1$: TO conserve angular momentum
+    \item $\Delta l = \pm 1$: To conserve angular momentum
     \item $\Delta m = 0, \pm 1$
 \end{itemize}    
     
@@ -321,7 +321,7 @@ As $J^2 = (L+S)^2 = L^2+S^2+2L\cdot J$, $\vec{L}\cdot\vec{S}$ can be rewritten a
 
 By first order perturbation theory (see QM notes), the (first order) energy shift is:
 
-\[\frac{\Delta E_{SO}}{hc} = \frac{A(L,S)}{2}[J(J+1) - L(L+!) - S(S+1)]\]
+\[\frac{\Delta E_{SO}}{hc} = \frac{A(L,S)}{2}[J(J+1) - L(L+1) - S(S+1)]\]
 
 Which the Term symbol now makes sense:
 \[ ^{2S+1}L_J\]
@@ -451,7 +451,7 @@ Gives rise to shifts and splittings:
 \subsubsection{Quadratic Stark Effect}
 No $l$ degeneracy means no electric dipole moment means no Stark shifts. However, the E field induces an electric dipole. Using second order Perturbation theory, the transition in the ground state of H:
 
-\[\Delta E_F = e^2 F_z^2 \sum_{n'}\frac{|\int \si^*_{n10}\hat{z}\psi_{100}d\tau|^2}{E_{100}-E_{n'10}}=-\frac12\alpha F^2_z\]
+\[\Delta E_F = e^2 F_z^2 \sum_{n'}\frac{|\int \psi^*_{n10}\hat{z}\psi_{100}d\tau|^2}{E_{100}-E_{n'10}}=-\frac12\alpha F^2_z\]
 
 The induced electric dipole moment can be obtained by $dE_F/dF_z=\alpha F_z$, so:
 \[\alpha = 7.42\times 10^{-41}Cm^2V^{-1}\]
@@ -611,7 +611,7 @@ The rotational energies can be adjusted by considering:
     \item Adjust the rotational constant at high $v$ to be:
     \[B_v = \langle|\frac{\hbar^2}{2\mu_{AB}R^2}|\rangle\]
     \item The centrifugal distortion at high $J$ can be adjusted by introducing a second order correction, $E_J^(2)$:
-    \[ E_J^(2) = -D_vJ^2(J+1)^2\]
+    \[ E_J^{(2)} = -D_vJ^2(J+1)^2\]
     Where $D_v$ is the \textit{centrifugal distortion constant} and is much smaller than $B_v$ typically.
 \end{enumerate}
 
@@ -651,7 +651,7 @@ Where $V_\text{dip} = -\vec{\mu}_\text{elec} \cdot \vec{F}$
 Rewriting in terms of spherical harmoincs, it is determined that: $\Delta J = J' - J = \pm 1$ and $\Delta M_J = 0$. Thus:
 \begin{align*}
     \Delta E_J &= E_{J+1} -E_J\\
-    &= B(J+1)(J+2) - BJ(J+1)
+    &= B(J+1)(J+2) - BJ(J+1)\\
     &= 2B(J+1)
 \end{align*}
 

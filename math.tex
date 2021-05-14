@@ -3,6 +3,8 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage[a4paper, total={6.5in, 9.5in}]{geometry}
+\usepackage[T1]{fontenc}
+
 
 
 
@@ -18,6 +20,32 @@
 Below are a list of important equations in Mathematics taught in year 2.
 
 
+
+
+\section{Taylor Expansion}
+If a function can be expanded as a power series about a point $x_0$:
+\[ f(x)|_{x_0} = \sum_{n=0}^\infty a_n x^n\]
+Then, this series can be found by the Taylor Expansion:
+\[f(x)|{x=x_0} = \sum_{n=0}^\infty \frac{f^{(n)}(x_0)}{n!}(x-x_0)^n\]
+
+A special case of $x_0=0$ is given by the Maclaurin series:
+\[ f(x) = \sum_{n=0}^\infty \frac{f^{(n)}(0)}{n!}x^n\]
+\subsection{Useful Series}
+The method can be applied to derive a few common functions. Here are some useful series that I should but am unable to remember by heart:
+
+\begin{align*}
+    \sin(x) &= x - \frac16 x^3 + \frac{1}{120}x^5 -\frac{1}{5040}x^7 +...\\
+    &= \sum_{n=0}^\infty \frac{(-1)^n}{(2n+1)}x^{2n+1}\\
+    \cos(x) &= 1 - \frac12 x^2 + \frac{1}{24}x^4 + \frac{1}{720}x^6-...\\
+    &= \sum_{n=0}^\infty \frac{(-1)^n}{(2n)!}x^{2n}
+\end{align*}
+A mnemonic is sine is an \textit{odd} function, and has an \textit{odd} series, whereas cosine is an \textit{even} function and has an \textit{even} series. The signs alternate to create the period. 
+
+As Euler's theorem states: $e^{ix} = \cos(x) + i\sin(x)$:
+\begin{align*}
+    e^x &= 1 + x + \frac12 x^2 + \frac16x^3 + \frac{1}{24}x^4 + \frac{1}{120}x^5 +...\\
+    &= \sum_{n=0}^\infty \frac{x^n}{n!}
+\end{align*}
 
 \section{Ordinary Differential Equation}
 
@@ -70,9 +98,13 @@ The Legendre Polynomials form an orthonormal basis over [-1,1] which can be furt
 
 \[ \langle P_l(x)|P_m(x)\rangle = \int^1_{-1} P_l(x)P_m(x)dx = \delta_{lm} \frac{2}{2l+1}\]
 
+\subsection{Complete Set and representation}
+With the orthogonality results above, it is known that Legendre Polynomial forms a complete set. As such, a function can be represented as a Legendre series with different coefficient  `adjustments', with coefficients given by:
+\[ c_n = \frac{2n+1}{2}\int^1_{-1}f(x)P_n(x)dx\]
 \paragraph{Associated Legendre Functions}
 Useful in Spherical Harmonics in Quantum Mechanics. ODE given by:
 \[ (1-x^2)y'' - 2xy' + [l(l+1) - \frac{m^2}{1-x^2}]y = 0 \]
+
 
 Solutions given by:
 \[P^m_l(x) = (1-x^2)^{m/2}\frac{d^m}{dx^m}P_l(x)\]
@@ -122,6 +154,189 @@ With coefficients given by:
 \text{Average of} \; [f(x)]^2 &= \sum^\infty_{-\infty} |c_n|^2
 \end{align*}
 Good way to remember it is with using Pythagoras Theorem to integrate sine squared and cosine squared. Useful in evaluating infinite sums where each term represents the coefficients of a Fourier Series and the function representing it can be used to give the result.
+
+\section{Special Relativity}
+
+\subsection{Basic Postulates}
+Einstein established that:
+\begin{enumerate}
+    \item The Laws of Physics must be the same in all inertial reference frame.
+    \item The speed of light is absolute in all reference frames.
+\end{enumerate}
+As a result, there is no such thing as absolute time or absolute distance. 
+
+\subsection{Time dilation}
+Picture a train moving really fast, at speed $v$. Person 1 is on the train, and Person 2 is on the platform. In front of Person 1, a light is on the floor and on the ceiling $z$ meters above is a mirror. As the train passes the platform, a photon is launched, hits the mirror and returns to the floor. This `journey' takes:
+\[ t_1 = \frac{2z}{c}\]
+(This is known as \textit{proper time}) To Person 2, the photon would not travel in a up and down, but its path would look triangular:
+\begin{align*}
+    t_2 &= \frac{2L}{c}\\
+    L &= \sqrt{\left(\frac{vt_2}{2}\right)^2 + z^2}
+\end{align*}
+We want to know what is this with respect to $t_1$:
+\begin{align*}
+    \frac{ct_2}{2} &= \sqrt{\left(\frac{vt_2}{2}\right)^2 + \left(\frac{ct_1}{2}\right)^2}\\
+    \therefore t_2 &= \frac{t_1}{\sqrt{1-\left(\frac{v}{c}\right)^2}}
+\end{align*}
+Where it is customary to have $\beta = \frac{v}{c}$ and $\gamma = 1/\sqrt{1-\beta^2}$, which is always greater than one. Thus, the \textbf{time contraction} formula is:
+\[ \boxed{t_{stay} = \gamma t_\text{move}}\]
+As something moves really really fast, time `slows down' so the speed of light remains unchanged. 
+
+\subsection{Length Contraction}
+We consider length contraction which occurs on the direction of relative motion. Person 1 measures the length of the train platform (proper length) with a tape measure and by how long it takes the front of the train to pass by the end of the platform to the front of the platform. Two synchronised clocks are used, one at the end and one at the front:
+\[ L_1 = vt_1\]
+From Person 2's point of view, the end of the platform passes him first, before the front reaches him. Only one clock (essentially a stopwatch) is required:
+\[ L_2 = vt_2\]
+However:
+\begin{align*}
+    \frac{L_2}{L_1} &= \frac{vt_1}{vt_2}\\
+    &= \frac{t_1}{\gamma t_1} \\
+    &= \frac{1}{\gamma}
+\end{align*}
+Therefore:
+\[\boxed{L_\text{move} = \frac{L_\text{stay}}{\gamma}}\]
+Person 2, with proper time, instead measures a contracted length. \textit{Object must `shrink' to maintain the speed of light}.
+
+\paragraph{Summary} 
+We can conclude that:
+\begin{enumerate}
+    \item Moving clocks run slow
+    \item Moving objects shorten
+    \item There is no absolute reference frame
+\end{enumerate}
+
+\subsection{Galilean Transformation}
+This is the old transformation that is to be super-ceded by Lorentz Transformation. Assuming that the frame $S'$ with coordinates $(t',x',y',z')$ is travelling in the $x$ direction at $v$:
+
+\begin{align*}
+    t' &= t\\
+    x' &= x - vt\\
+    y' &= y\\
+    z' &= z\\
+\end{align*}
+
+\begin{equation*}
+    \begin{pmatrix}
+    t' \\
+    x' \\
+    y' \\
+    z' \\
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+    1 &0 &0 &0 \\
+    -v &1 &0 &0 \\
+    0 &0 &1 &0 \\
+    0 &0 &0 &1 \\
+    \end{pmatrix}
+    \begin{pmatrix}
+    t \\
+    x \\
+    y \\
+    z \\
+    \end{pmatrix}
+\end{equation*}
+
+\subsection{Lorentz Transformation}
+However, from the discussion above, something measured in reference frame $S'$ simply cannot be the the `same' as that in $S$. A point at $x'$ living in $S'$, when viewed by an observer in $S$, is essentially a rod moving at $v$. Thus, its `length' would be:
+\[ x' = \gamma(x-vt)\]
+On the other hand, an observer on $S'$ would see $x$ as the rod moving at $-v$, so:
+\[ x = \gamma(x' + vt')\]
+Solving in terms of $t$ and $t'$ gives:
+\begin{align*}
+    t' &= \gamma\left(t-\frac{v}{c^2}x\right)\\
+    x' &= \gamma(x - vt)\\
+    y' &= y\\
+    z' &= z\\
+\end{align*}
+
+The reverse would be (also recovered by putting $-v$):
+
+\begin{align*}
+    t &= \gamma\left(t'+\frac{v}{c^2}x'\right)\\
+    x &= \gamma(x' + vt')\\
+    y &= y\\
+    z &= z\\
+\end{align*}
+
+A matrix representation in terms of a dimensionless four vector would be:
+
+\[
+\begin{pmatrix}
+ct'\\
+x'\\
+y'\\
+z'\\
+\end{pmatrix}
+=
+\begin{pmatrix}
+\gamma &-\gamma\beta &0 &0\\
+\gamma \beta &\gamma & 0 & 0\\
+0 &0 & 1 & 0\\
+0& 0&0&1
+\end{pmatrix}
+\begin{pmatrix}
+ct\\
+x\\
+y\\
+z\\
+\end{pmatrix}
+\]
+
+\subsection{Einstein Velocity Addition}
+Take the differential of $x$ and $t$ and divide. Given an object travelling at a velocity $v_a$ relative to another object at $v_b$, its velocity in a rest frame would be:
+\[v_{ab} = \frac{v_a+v_b}{1 + {v_av_b}/{c^2}}\]
+
+\subsection{Doppler Effect}
+For a receding wave:
+\[ f = f_0 \sqrt{\frac{1-\frac{v}{c}}{1+\frac{v}{c}}}\]
+Its wavelength would be:
+\[ \lambda = \lambda_0 \sqrt{\frac{1+\frac{v}{c}}{1-\frac{v}{c}}}\]
+
+\subsection{Mass, Momentum and Energy}
+\subsubsection{Momentum}
+Along the boost direction:
+\[\mathbf{p} = m\frac{dx}{dt_0}=m\frac{dx}{dt}\frac{dt}{dt_0}=\gamma m\mathbf{u}\]
+
+\subsection{Energy}
+By integrating:
+\[ KE = \int_0^t \left(\frac{dp}{dt}\right)(vdt) = \int^p_0 vdp\]
+Rewriting momentum in terms of velocity:
+\[ KE = (\lambda - 1) mc^2\]
+The term independent of the particle's speed is known as the \textit{rest energy}:
+\[E_0 = mc^2\]
+The total energy is the kinetic energy and the rest energy:
+\[E = \gamma mc^2\]
+
+To express energy in terms of momentum:
+\[ E^2 = p^2c^2 + (mc^2)^2\]
+Which can easily be remembered by picturing a triangle (i.e. with the hypotenuse $E$).
+
+A four vector in terms of the energy and the momentum components would also transform as the Lorentz four vector:
+
+
+\[
+\begin{pmatrix}
+E/c'\\
+p_x'\\
+p_y'\\
+p_z'\\
+\end{pmatrix}
+=
+\begin{pmatrix}
+\gamma &-\gamma\beta &0 &0\\
+\gamma \beta &\gamma & 0 & 0\\
+0 &0 & 1 & 0\\
+0& 0&0&1
+\end{pmatrix}
+\begin{pmatrix}
+Ec\\
+p_x\\
+p_y\\
+p_z
+\end{pmatrix}
+\]
+
 
 \section{Integral Transform}
 
@@ -188,6 +403,344 @@ The solution would be:
 \[y = \int G(x,t) f(t) dt\]
 This can be shown by substituting this solution into the DE and solving to find it equal to $f(x)$. 
 
+
+
+
+
+\section{Complex Analysis}
+
+
+A complex function is given by:
+\[f(z) = u(x,y) + iv(x,y)\]
+
+Its derivative would similarly be defined as:\[ \frac{df(z)}{dz} = \lim_{\Delta z\to z_0}\frac{f(z)}{\Delta z}\]
+Which has to exist and has the same value regardless of the direction of approach.
+
+
+
+\subsection{Cauchy-Riemann Conditions}
+\begin{align*}
+    \frac{\partial u}{\partial x} &= \frac{\partial v}{\partial y}\\
+    \frac{\partial v}{\partial x} &= -\frac{\partial u}{\partial y}
+\end{align*}
+
+If $u$ and $v$ and their derivatives are continuous and satisfy the Cauchy-Riemann conditions, $f(z)$ is analytic in the region. 
+
+\subsection{Expansion}
+If $z_0$ is in a region in which $f(z)$ is analytical, $f(z_0)$ can be expanded as a Taylor Series which has a circle of convergence (convergent limit) to the nearest singular point.
+
+\subsection{Harmonic}
+\begin{enumerate}
+    \item If $f(z)$ is analytical in a region, $u$ and $v$ are harmonic and satisfies Laplace's equation
+    \item (Corollary?) Any $u$ or $v$ which satisfies Laplace's Equation corresponds to the real or imaginary part of a complex function. 
+\end{enumerate}
+
+\subsection{Cauchy's Theorem}
+In a region enclosed by a simple connected curve $C$, if $f(z)$ is analytic in and on the $C$, then:
+
+\[ \oint_C f(z) dz = 0\]
+
+This can be proved using Green's Theorem and the Cauchy-Riemann Conditions. Green's theorem is given by:
+\[\iint \frac{\partial Q}{\partial y} + \frac{\partial P}{\partial x} dy\,dx = \oint Qdx - \oint P dy\]
+
+\subsection{Cauchy's Integral Formula}
+
+For $z=a$ inside a region in which $f(z)$ is analytic:
+
+\[ f(a) = \frac{1}{2\pi i} \oint_C \frac{f(z)}{z-a} dz\]
+
+\textsc{Note}: If $a$ lies outside the region, $\frac{f(z)}{z-a}$ is analytic in $C$, and would be equal to zero by Cauchy's Theorem.
+
+\subsection{Laurent's Theorem}
+
+Let $C_1$ and $C_2$ be concentric circles with the same center $z_0$. If $f(z)$ is analytic in the region $R$ between the circles (outside $C_1$ but inside $C_2$), then $f(z)$ can be expanded in a series of the form:
+\[ f(z) = a_0 + a_1(z-z_0) + a_2(z-z_0)^2+a_3(z-z_0)^3 +...+\frac{b_1}{(z-z_0)}+\frac{b_2}{(z-z_0)^2}+...\] 
+Which is convergent in $R$. This series is called a \textit{Laurent Series}, with the $b$ series being the \textit{principal part}.
+
+\subsubsection{Coefficients}
+While the coefficients can be found by the formulas:
+\[
+a_n = \frac{1}{2\pi i} \oint_C \frac{f(z)dz}{(z-z_0)^{n+1}} \quad\text{and}\quad b_n = \frac{1}{2\pi i} \oint_C \frac{f(z)dz}{(z-z_0)^{-n+1}}
+\]
+However, a simpler way is often to expand a function in partial fractions and write it as a power series. 
+
+\paragraph{Definitions}
+\begin{enumerate}
+    \item If there is no $b$ series (i.e. all $b$ are zero, $f(z)$ is analytic at $z=z_0$ and $z_0$ is a \textit{regular point}
+    \item If $b$ terminates after $b_n$, then $f(z)$ has a \textit{pole of order $n$}. If $n=1$, $f(z)$ has a simple pole.
+    \item If the $b$ series is infinite, then it has an \textit{essential singularity} in $1=z_0$.
+    \item $b_1$ is the \textit{residue} of $f(z)$ at $z=z_0$.
+\end{enumerate}
+
+\subsection{Finding Residues}
+There are a few methods to find residues:
+
+\paragraph{Laurent Series}
+Simply expand $f(z)$ as a Laurent Series.
+
+\paragraph{Simple Pole}
+If $f(z)$ has a simple pole, multiply by $(z-z_0)$ and evaluate it at $z=z_0$:
+
+\[R(z_0) =\lim_{z\to z_0} (z-z_0)f(z)\]
+
+\paragraph{Function is one divided by another}
+
+For $f(z) = g(z)/h(z)$ and $g(z_0) = \text{finite constant}$ but $\neq 0$ and $h(z_0) = 0$ by L'Hopital's rule:
+\[ R(z_0) = \frac{g(z_0)}{h'(z_0)}\]
+
+\paragraph{Multiple Poles}
+
+\[R(z_0) = \frac{1}{(m-1)!}\frac{d^{(m-1)}}{dx^{(m-1)}}(z-z_0)^mf(z)\]
+
+
+\subsection{Residue Theorem}
+For an integral around $C$ in the counterclockwise direction:
+
+\[\oint_Cf(z)dz = 2\pi i \sum \text{residues in } C\]
+
+\subsection{Applications: Evaluation of Definite Integrals}
+
+\subsubsection{Change of Variables}
+In an integral with rational function of sine and cosine between $[0,2\pi]$ or (depending on whether the function is odd or even) $[0,\pi]$, do a change of variable $z = e^{i\theta}$. The integral can subsequently be found with the Residue theorem.
+
+\subsubsection{Stretching (Jordan's Lemma)}
+An integral of the form:
+\[ \int^\infty_{-\infty}\frac{P(x)}{Q(x)}dx\]
+Where $Q(x)$ is at least two degrees greater than $P(x)$ and if $Q(z)$ has no real zeroes (\textit{holes} in the $x$ axis) can be evaluated. If $P(x)/Q(x)$ is even, then the integral can also be evaluated for $[0,\infty]$.
+
+This is because this can be rewritten as:
+\[\oint_C\frac{P(x)}{Q(x)} = \int\rho_{-\rho}\frac{P(x)}{Q(x)}dx + \int_0^\pi \frac{P(e^{i\theta})}{Q(e^{i\theta})}d\theta\]
+Whereby stretching $\rho\to\infty$, the last integral dies, and LHS is evaluated by Residue theorem. As such:
+\[\oint_C \frac{P(X)}{Q(x)} = \int^\infty_{-\infty}\frac{P(x)}{Q(x)}\]
+
+
+\section{Calculus of Variations}
+
+\subsection{Euler-Lagrange Equation}
+For a functional:
+\[ \int L(x,y,y') dx\]
+
+Then the Euler-Lagrange equation gives the function which minimises the integral:
+
+\[ \frac{d}{dx}\left(\frac{\partial L}{\partial y'} \right) -\frac{\partial L}{\partial y} = 0\]
+
+In classical mechanics, a Lagrangian can be written as:
+\[ L = T -V\]
+Which $T$ is the kinetic energy and $V$ is the potential energy. Euler-Lagrange equation would give the equation of motion for the system.
+
+\subsection{Beltrami's Identity}
+For a special case of a functional in the form $F(y,y')$:
+\[ F - y'\frac{\partial F}{\partial y'} = C\]
+Where $C$ is an unknown constant. This is proven by finding the derivative of \[ \frac{d}{dx}\left(F - y'\frac{\partial F}{\partial y'}\right)\] and recovering EL's equation. 
+
+
+\section{Group Theory}
+
+\paragraph{Definition}
+A group ${G,*}$ consists of a set $G$ and a binary operation $*$. Writing $a*b$ means do $b$ first before doing $a$. This is a mapping of $*:G\times G\to G$
+\subsection{Group Axioms}
+\begin{description}
+\item [Closure] For $f,g \in G$, $f*g \in G$.
+\item [Identity] For every element in $G$, $e * f = f* e = f$
+\item [Inverse] For every element in $G$, $f^{-1} \in G$ and $f*f^{-1} = f^{-1}*f =e$
+\item [Associativity] For $f,g,h\in G$, \(
+(f * g)*h = f*(g*h)\)
+\end{description}
+
+\paragraph{Abelian Group} If a group commutes (order does not matter), it is \textit{abelian}.
+
+\paragraph{Order} The order of a (finite) group is defined by the number of elements in the group $|G|$. 
+
+\subsection{Example of Groups}
+
+\subsubsection{Cyclic Groups}
+This is rotating a $n$ sided polygon. Each operation rotates it by $2\pi/n$ radians. Thus:
+
+\[ C_n = \{e,r,r^2,r^3,...,r^{n-1}\}\]
+
+\subsubsection{Dihedral Groups}
+This group defines the reflections and rotations of a $n$ sided polygon. $|D_n| = 2n$.
+\subsubsection{Permutation Groups}
+A permutation group simply permutes elements in a set. It can be written in a few different notations:
+\[ \sigma = 
+\begin{pmatrix}
+1 & 2 & 3 & 4\\
+3 & 1 & 2 & 4
+\end{pmatrix}\]
+Where the second row describes where to move the elements to.
+
+Another notation is:
+\[ (132) \]
+Which describes the same thing:
+\[ 1 \to 3 \qquad 3 \to 2 \qquad 2\to 1\]
+\subsection{Multiplication Table}
+This table defines the results of operating with the group elements (I think it is also called Cayley Tables). For example, the table for $C_3$ is:
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|ccc}
+         $C_3$ & $e$ & $r$ & $r^2$  \\
+         \hline
+         $e$ & $e$ & $r$ & $r^2$\\
+         $r$ & $r$ & $r^2$ & $e$\\
+         $r^2$& $r^2$ & $e$ & $r$
+    \end{tabular}
+    \label{tab:c3}
+\end{table}
+
+\paragraph{Rearrangement Theorem}
+Each element must only appear in each column or row once. (Like Sudoku.)
+
+\subsection{Isomorphic Groups}
+Groups are isomorphic if they have the same multiplication table. If two groups are isomorphic:
+\[ F \cong G\]
+
+
+
+\subsection{Subgroups}
+This is where a smaller group exists within a larger group with the same operator:
+\[ H \subseteq G\]
+If this is the case, only the \textbf{inverse} and \textbf{closure} axiom have to be checked.
+
+\paragraph{Order of an element}
+The order of an element is defined to as the number of times it has to operate on itself to become the identity element:
+\[ g^d = e\]
+
+This property can be used to generate cyclic subgroup of a group.
+
+\subsection{Homomorphism}
+
+Let $(G,*)$ and $(H,\cdot)$ be two groups. Let $f$ be a function which maps elements in $G$ to $H$, so $f: G\to H$. If $G$ and $H$ is homomorphic:
+\[ f(x*y) = f(x) \cdot f(y)\]
+
+\subsection{Representation}
+A representation is the mapping $f: G \to GL_n(\mathbb{C})$, where $GL_n(\mathbb{C})$ is the \textit{general linear group}.
+
+\subsubsection{Representation of $D_3$}
+The dihedral group ($D_n$) has a 2D representation because they represent linear transformations in 2D space. For $D_3$, let a triangle has vertices at $1\to (0,1), 2\to(1,0), 3\to(-1,0)$
+
+Any clockwise rotation is the transformation given by the matrix:
+\[
+\begin{pmatrix}
+\cos\theta & \sin\theta\\
+-\sin\theta & \cos\theta
+\end{pmatrix}
+\]
+
+Then, $r$ corresponds to a clockwise rotation of $120^\circ$ and $r^2$ corresponds to a clockwise rotation of $240^\circ$. The representation is given by:
+\[
+\rho(r) = 
+\begin{pmatrix}
+-1/2 &{\sqrt3}/{2}\\
+-{\sqrt3}/{2} & -1/2
+\end{pmatrix}
+\qquad
+\rho(r^2) = 
+\begin{pmatrix}
+-1/2 &-{\sqrt3}/{2}\\
+{\sqrt3}/{2} & -1/2
+\end{pmatrix}
+\]
+A reflection on the $y$ axis is given by:
+\[\rho(a) = 
+\begin{pmatrix}
+-1 & 0\\
+0 & 1
+\end{pmatrix}\]
+It is known that the representation is homomorphic. Reflection along other axis is the same as reflection followed by rotation: $b = ar$. By the definition of homomorphism, $\rho(b)=\rho(a)\rho(r)$:
+\begin{align*}
+    \rho(a)\rho(r) &= 
+\begin{pmatrix}
+-1 & 0\\
+0 & 1
+\end{pmatrix}
+\begin{pmatrix}
+-1/2 &{\sqrt3}/{2}\\
+-{\sqrt3}/{2} & -1/2
+\end{pmatrix} 
+=\begin{pmatrix}
+1/2 &-{\sqrt3}/{2}\\
+-{\sqrt3}/{2} & -1/2
+\end{pmatrix}\\
+\rho(a)\rho(r^2) (= \rho(r)\rho(a)) &=
+\begin{pmatrix}
+-1 & 0\\
+0 & 1
+\end{pmatrix}\begin{pmatrix}
+-1/2 &-{\sqrt3}/{2}\\
+{\sqrt3}/{2} & -1/2
+\end{pmatrix}
+=
+\begin{pmatrix}
+1/2 &{\sqrt3}/{2}\\
+{\sqrt3}/{2} & -1/2
+\end{pmatrix}
+\end{align*}
+
+\subsubsection{Determinant Representation}
+This can be taken one step further. The determinant representation is defined to be the determinant of the `natural' representation. Let $G$ be a group, then its determinant representation is:
+\[ f(g) = \det (g)\]
+For the natural representation above:
+\[
+\begin{matrix}
+f(e) = 1 & f(r) = 1 & f(r^2) = 1\\
+f(a) = -1 & f(b) = -1 & f(c) = -1
+\end{matrix}
+\]
+Which distinguishes between rotations and reflections.
+
+\subsubsection{Equivalent Representations}
+Suppose another representation is defined as:
+\[\gamma(g) = P^{-1}\rho(g)P\]
+Then:
+\[\gamma(gh) = P^{-1}\rho(gh)P = P^{-1}\rho(g)\rho(h)P = P^{-1}\rho(g)PP^{-1}\rho(h)P = \gamma(g)\gamma(h)\]
+
+Thus in general:
+\paragraph{Definition}
+Two representations are equivalent if they can be expressed as:
+\[\rho(h) = P^{-1}\sigma(h)P\]
+Two representations are equivalent if they have the same dimensions.
+
+For example, $\rho$ and $\theta$ cannot be equivalent representations of group $G$ if either one of them are equal to the identity matrix $I_n$.
+
+Another example is 1 dimensional representations are only equivalent iff they are equal (as they commute).
+
+\subsubsection{Reducible Representations}
+A representation is reducible if it is in a block diagonal matrix. 
+
+Determining whether representations are reducible can be performed by using equivalent representations.
+
+\subsection{Characters}
+The \textit{character} of a representation is the trace of the representation. If we call the character of representation $\rho$ as $\chi_\rho$, then $\chi_\rho:G\to \mathbb{C}$:
+\[ \chi_\rho(g) = \text{Tr}\rho(g)\]
+
+\subsubsection{Conjugate}
+Two element \(x,y \in G\) are conjugate if there is a \(g \in G\) where \(y = g^{-1}x g\).
+
+\paragraph{Lemma} Conjugates have equivalent characters\footnote{Characters are a function of class.}.
+
+A conjugacy class is given by:
+\[ [x] = \{y \in G : x \,\text{and} \,y \text{ are conjugates}\} \]
+
+This is useful because \textit{the number of irreducible representations are equal to the number of conjugate classes}
+
+The group $D_3$ has three conjugacy classes:
+\[ [e] = \{e\} \qquad [r] = \{r,r^2\} \qquad [a]=[b]=[c] = \{a,b,c\}\]
+
+Let $\rho$ be a reducible representation.
+\begin{itemize}
+    \item The irreducible representations of $G$ is $r$
+    \item The conjugacy classes of $G$ is $c$
+\end{itemize}
+Then:
+\begin{itemize}
+    \item $n_r$ refers to the number of copies of irreducible representations in $\rho$
+    \item $n_c$ is the number of conjugacy classes in $G$
+\end{itemize}
+
+Then:
+\[|G|n_r = \sum_c n_c \overline{\chi_r(c)}\chi_p(c)\]
+Where $\overline{\chi_r(c)}$ is the complex conjugate.\ref{tab:c3}
 
 
 \end{document}
